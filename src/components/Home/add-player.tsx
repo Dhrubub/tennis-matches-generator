@@ -2,9 +2,17 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { addPlayer, removePlayer } from "../store/Players/actions"
+import { addPlayerAction, Player } from "../../store/Players/actions"
+import { selectPlayers } from "../../store/Players/selector";
 
 const Container = styled.div`
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;  
+`;
+
+const FormContainer = styled.div`
     display: block;
     border-radius: 6px;
     color: white;
@@ -12,44 +20,73 @@ const Container = styled.div`
 
     width: fit-content;
     height: fit-content;
-    padding: 50px;
+    padding: 20px;
 
     margin: auto;
     margin-bottom: 20px;
     margin-top: 20px;
-
-    
 `;
 
+
 interface AddPlayerProps {
-    addPlayer: (name: string, ability: string)  => void
+    addPlayer: (player: Player) => void
+    playerList: Player[];
+    changeTab: () => void;
 }
+
 const AddPlayer = (props: AddPlayerProps) => {
     const [name, setName] = useState("")
     const [ability, setAbility] = useState("Beginner");
 
+    const [player, setPlayer] = useState<Player>({name: "", ability: "Beginner"});
+
     useEffect(() => {
-        setName(name)
+        setName(name.trim().toLowerCase())
         setAbility(ability)
 
     },[name, ability]);
 
+    useEffect(() => {
+        setPlayer({name , ability})
+
+    },[name, ability]);
+
+
+    const checkRepeated = () => {
+        let found = false;
+
+        for (let i = 0 ; i < props.playerList.length ; i++) {
+            if (player.name == props.playerList[i].name) {
+                found = true;
+            }
+        }
+        return found;
+    }
+
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        props.addPlayer(name, ability);
+    
+        if (checkRepeated()) {
+            window.alert("Player already added")
+        }
+        else if (player.name.trim().length == 0) {
+            window.alert("Please enter a valid player")
 
+        }
+        else {
 
-        const player = {
-            name,
-            ability
+            props.addPlayer(player);
+            setName("")
+            setAbility("Beginner")
         }
 
-        //console.log(player)
     }
 
     return (
         <React.Fragment>
             <Container>
+
+            <FormContainer>
                 <form onSubmit={handleSubmit}>
                     <label>Name: </label>
                     <input type="text" name="name" value={name} onChange={(e) => {setName(e.target.value)}}></input>
@@ -65,6 +102,9 @@ const AddPlayer = (props: AddPlayerProps) => {
                     <br />
                     <button type="submit">Submit</button>
                 </form>
+
+            </FormContainer>
+                <button onClick={props.changeTab}>Create Sets</button>
             </Container>
                 
             
@@ -73,13 +113,19 @@ const AddPlayer = (props: AddPlayerProps) => {
     );
 }
 
+function mapStateToProps(state: any) {
+    return ({
+        playerList: selectPlayers(state)
+    })
+}
+
 function mapDispatchToProps(dispatch: any) {
     return {
-        addPlayer: (name: string, ability: string): void => {
-            dispatch(addPlayer({name, ability}))
+        addPlayer: (player: Player): void => {
+            dispatch(addPlayerAction(player))
         }
     }
 
 }
 
-export default connect(null, mapDispatchToProps)(AddPlayer);
+export default connect(mapStateToProps, mapDispatchToProps)(AddPlayer);

@@ -39,13 +39,13 @@ export const fetchPlayersSuccessAction = (players: Player[]) =>{
     }
 }
 
-export const fetchPlayers = () => {
+export const fetchPlayersAction = () => {
     return {
         type: at.FETCH_PLAYERS,
     }
 }
 
-export const addPlayer = (player: Player) => {
+export const addPlayerAction = (player: Player) => {
     return {
         type: at.ADD_PLAYER,
         payload: player, 
@@ -53,7 +53,7 @@ export const addPlayer = (player: Player) => {
     
 };
 
-export const removePlayer = (index: number) => {
+export const removePlayerAction = (index: number) => {
     return {
         type: at.REMOVE_PLAYER,
         payload: index, 

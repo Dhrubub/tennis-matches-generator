@@ -1,25 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from "react-redux";
-
-import { addPlayer, removePlayer } from "../store/Players/actions"
+import { removePlayerAction } from "../../store/Players/actions"
 
 const Container = styled.div`
     display: block;
-    border-radius: 6px;
+    border-radius: 20px;
     color: white;
     background-color: skyblue;
-
-    width: fit-content;
+    
     height: fit-content;
+    word-wrap: break-word;
+
+    width: 300px;
     padding: 10px;
     z-index: 1000;
 
     margin: auto;
     margin-bottom: 20px;
-
-
-    
 `;
 
 interface PlayerProps {
@@ -38,6 +36,8 @@ const Player = (props: PlayerProps) => {
         <Container>
             { props.name }
             <br />
+            { props.ability }
+            <br />
             <button onClick={handleRemove}>Remove</button>
         </Container>
         
@@ -47,7 +47,7 @@ const Player = (props: PlayerProps) => {
 function mapDispatchToProps(dispatch: any) {
     return {
         removePlayer: (id: number): void => {
-            dispatch(removePlayer(id))
+            dispatch(removePlayerAction(id))
         }
     }
 

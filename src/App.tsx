@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -7,18 +7,28 @@ import store from "./store/store"
 
 import styled from "styled-components";
 
-import AddPlayer from "./components/add-player";
-import ListPlayers from "./components/list-players";
+import AddPlayer from "./components/Home/add-player";
+import ListPlayers from "./components/Home/list-players";
 
+import Home from "./components/Home"
+import MatchCreator from "./components/MatchCreator"
 
+export enum Tab {
+  HOME,
+  MATCH_CREATOR
+}
 
-function App() {
+const App = () => {
+  const [tab, setTab] = useState<Tab>(Tab.HOME)
   return (
     <Provider store={store}>
-      <div>
-          <AddPlayer/>
-          <ListPlayers/>
-      </div>
+      { tab === Tab.HOME ? 
+        <Home changeTab={()=>setTab(Tab.MATCH_CREATOR)}/>
+      :null}
+
+      { tab === Tab.MATCH_CREATOR ? 
+        <MatchCreator changeTab={()=>setTab(Tab.HOME)}/>
+      :null}
     </Provider>
   );
 }
