@@ -14,7 +14,7 @@ interface PlayerState {
 }
 
 const initialState: PlayerState = {
-    playerList: [{name: "tester", ability: "Beginner"}],
+    playerList: [],
     isLoading: false
 }
 
@@ -53,9 +53,6 @@ export default (state = initialState, action: Action) => {
         }
 
         case at.REMOVE_PLAYER:
-            //console.log(action.payload);
-            console.log(state.playerList.filter((player, id)=> id !== action.payload));
-            
             return {
                 ...state,
                 playerList: state.playerList.filter((player, id) => id !== action.payload )
@@ -63,7 +60,6 @@ export default (state = initialState, action: Action) => {
         }
 
         default: 
-            //console.log("default");
             return state;
             
     }

@@ -12,13 +12,26 @@ const Container = styled.div`
     height: fit-content;
     word-wrap: break-word;
 
-    width: 300px;
+    width: 500px;
     padding: 10px;
     z-index: 1000;
 
     margin: auto;
     margin-bottom: 20px;
 `;
+
+const PlayerName = styled.label`
+    float: left;
+    margin-left: 20px;
+    
+`;
+
+const PlayerAbility = styled.label`
+    float: left;
+    margin-left: 30px;
+    
+`;
+
 
 interface PlayerProps {
     name: string,
@@ -34,9 +47,16 @@ const Player = (props: PlayerProps) => {
     } 
     return (
         <Container>
+            <PlayerName>
+
             { props.name }
-            <br />
+            </PlayerName>
+
+            <PlayerAbility>
             { props.ability }
+
+            </PlayerAbility>
+            <br />
             <br />
             <button onClick={handleRemove}>Remove</button>
         </Container>

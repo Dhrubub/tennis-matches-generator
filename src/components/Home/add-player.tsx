@@ -7,6 +7,7 @@ import { selectPlayers } from "../../store/Players/selector";
 
 const Container = styled.div`
     width: fit-content;
+    text-align: center;
     margin: auto;
     margin-bottom: 20px;
     margin-top: 20px;  
@@ -27,6 +28,29 @@ const FormContainer = styled.div`
     margin-top: 20px;
 `;
 
+const Form = styled.form``;
+
+const Label = styled.label`
+    margin: 5px;
+`;
+
+const Input = styled.input`
+    margin: 5px;
+`;
+
+const Select = styled.select`
+    padding: 5px;
+    margin-right: 15px;
+    //background-color: lightgreen;
+`;
+
+const Option = styled.option`
+    //background-color: red;
+
+`;
+
+
+
 
 interface AddPlayerProps {
     addPlayer: (player: Player) => void
@@ -40,14 +64,19 @@ const AddPlayer = (props: AddPlayerProps) => {
 
     const [player, setPlayer] = useState<Player>({name: "", ability: "Beginner"});
 
+    const editName = (inputName: string) => {
+        let name = inputName.trim().toLowerCase();
+        name = name.charAt(0).toUpperCase() + name.slice(1);
+        return name
+    }
     useEffect(() => {
-        setName(name.trim().toLowerCase())
+        setName(editName(name))
         setAbility(ability)
 
     },[name, ability]);
 
     useEffect(() => {
-        setPlayer({name , ability})
+        setPlayer({name, ability})
 
     },[name, ability]);
 
@@ -87,21 +116,17 @@ const AddPlayer = (props: AddPlayerProps) => {
             <Container>
 
             <FormContainer>
-                <form onSubmit={handleSubmit}>
-                    <label>Name: </label>
-                    <input type="text" name="name" value={name} onChange={(e) => {setName(e.target.value)}}></input>
-                    <br />
-                    <br />
-                    <label>Ability: </label>
-                    <select name="ability" value={ability} onChange={(e) => {setAbility(e.target.value)}}>
-                        <option>Beginner</option>
-                        <option>Intermediate</option>
-                        <option>Advanced</option>
-                    </select>
-                    <br />
-                    <br />
-                    <button type="submit">Submit</button>
-                </form>
+                <Form onSubmit={handleSubmit}>
+                    <Label>Name: </Label>
+                    <Input type="text" name="name" value={name} onChange={(e) => {setName(e.target.value)}}></Input>
+                    <Label>Ability: </Label>
+                    <Select name="ability" value={ability} onChange={(e) => {setAbility(e.target.value)}}>
+                        <Option>Beginner</Option>
+                        <Option>Intermediate</Option>
+                        <Option>Advanced</Option>
+                    </Select>
+                    <button type="submit">Add Player</button>
+                </Form>
 
             </FormContainer>
                 <button onClick={props.changeTab}>Create Sets</button>
