@@ -1,4 +1,7 @@
 import { combineReducers } from "redux";
+import playerReducer from "./Players/reducer"
 
 
-export default combineReducers({});
+export const state = combineReducers({
+    player: playerReducer
+});

@@ -3,32 +3,23 @@ import logo from './logo.svg';
 import './App.css';
 
 import { Provider } from "react-redux";
-
 import store from "./store/store"
-
 
 import styled from "styled-components";
 
+import AddPlayer from "./components/add-player";
+import ListPlayers from "./components/list-players";
+
+
+
 function App() {
   return (
-      <Provider store={store}>
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.tsx</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              >
-              Learn React Testing
-            </a>
-          </header>
-        </div>
-      </Provider>
+    <Provider store={store}>
+      <div>
+          <AddPlayer/>
+          <ListPlayers/>
+      </div>
+    </Provider>
   );
 }
 
