@@ -123,7 +123,8 @@ const AddPlayer = (props: AddPlayerProps) => {
                     <Select name="ability" value={ability} onChange={(e) => {setAbility(e.target.value)}}>
                         <Option>Beginner</Option>
                         <Option>Intermediate</Option>
-                        <Option>Advanced</Option>
+                        <Option>Competent</Option>
+                        <Option>Proficient</Option>
                     </Select>
                     <button type="submit">Add Player</button>
                 </Form>
