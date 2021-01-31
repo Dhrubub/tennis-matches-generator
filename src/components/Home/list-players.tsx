@@ -19,7 +19,7 @@ const ListPlayers = (props: ListPlayersProps) => {
         <React.Fragment>
             {props.playerList.map((player, id) => (
                 <Player key={id} id={id} name={player.name} ability={player.ability}/>
-            ))} 
+            )).reverse()} 
         </React.Fragment>
         
     );

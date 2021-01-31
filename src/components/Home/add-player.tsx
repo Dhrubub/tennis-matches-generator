@@ -130,7 +130,14 @@ const AddPlayer = (props: AddPlayerProps) => {
                 </Form>
 
             </FormContainer>
-                <button onClick={props.changeTab}>Create Sets</button>
+                <button onClick={()=>{
+                    if (props.playerList.length % 4 === 0 && props.playerList.length !== 0) {
+                        props.changeTab()
+                    }
+                    else {
+                        window.alert("Number of players must be greater 0 and divisible by 4")
+                    }
+                    }}>Create Sets</button>
             </Container>
                 
             

@@ -13,8 +13,19 @@ interface PlayerState {
 
 }
 
+const testList = [
+    {name: "A", ability: "Beginner"},
+    {name: "B", ability: "Proficient"},
+    {name: "C", ability: "Intermediate"},
+    {name: "D", ability: "Beginner"},
+    {name: "W", ability: "Competent"},
+    {name: "X", ability: "Beginner"},
+    {name: "Y", ability: "Proficient"},
+    {name: "Z", ability: "Beginner"},
+]
+
 const initialState: PlayerState = {
-    playerList: [],
+    playerList: testList,
     isLoading: false
 }
 
