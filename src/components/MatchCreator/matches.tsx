@@ -22,8 +22,14 @@ interface ListPlayersProps {
     playerList: Player[];
     changeTab: () => void;
 }
+
+interface PlayerWithRating {
+    name: string,
+    ability: any,
+}
+
 const Matches = (props: ListPlayersProps) => {
-    const [shuffledList, setShuffledList] = useState<Array<Player>>([])
+    const [shuffledList, setShuffledList] = useState<Array<PlayerWithRating>>([])
     const [set, setSet] = useState<Set>()
     const [setUp, setSetUp] = useState<Array<Set>>([])
 
@@ -35,7 +41,28 @@ const Matches = (props: ListPlayersProps) => {
     }, []);
     
     const shufflePlayers = () => {
-        const tempList = [...props.playerList];
+        const tempList: PlayerWithRating[] = props.playerList.map(a => ({...a}));
+
+        for (let count = 0 ; count < tempList.length ; count++) {
+            switch (tempList[count].ability) {
+                case "Beginner":
+                    tempList[count].ability = 1;
+                    break;
+                case "Intermediate":
+                    tempList[count].ability = 2;
+                    break;
+                case "Competent":
+                    tempList[count].ability = 3;
+                    break;
+                case "Proficient":
+                    tempList[count].ability = 4;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
         let m = tempList.length, t, i;
           // While there remain elements to shuffle…
           while (m) {
@@ -59,21 +86,33 @@ const Matches = (props: ListPlayersProps) => {
 
     //  SELECT THE FIRST SET
     //==========================================================
+    const selectSet = (i: number) => {
+            setSet({
+                teamOne: {
+                    playerOne: shuffledList[i * 4 + 0],
+                    playerTwo: shuffledList[i * 4 + 1],
+                },
+                teamTwo: {
+                    playerOne: shuffledList[i * 4 + 2],
+                    playerTwo: shuffledList[i * 4 + 3],
+                }
+            })
+
+    }
+
+    const checkSet = (set: Set) => {
+
+
+    }
+
     useEffect(() => {
         const numSets = shuffledList.length / 4;
         console.log(numSets)
         for (let i = 0 ; i < numSets ; i++) {
 
-            // setSet({
-            //     teamOne: {
-            //         playerOne: shuffledList[i * 4 + 0],
-            //         playerTwo: shuffledList[i * 4 + 1],
-            //     },
-            //     teamTwo: {
-            //         playerOne: shuffledList[i * 4 + 2],
-            //         playerTwo: shuffledList[i * 4 + 3],
-            //     }
-            // })
+            selectSet(i)
+
+
 
             setSetUp((prevState) => [
                 ...prevState, {
@@ -89,10 +128,7 @@ const Matches = (props: ListPlayersProps) => {
 
             ])
         }
-
         console.log(setUp)
-        
-
     }, [shuffledList])
     //==========================================================
 

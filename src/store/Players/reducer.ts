@@ -14,14 +14,14 @@ interface PlayerState {
 }
 
 const testList = [
-    {name: "A", ability: "Beginner"},
-    {name: "B", ability: "Proficient"},
-    {name: "C", ability: "Intermediate"},
-    {name: "D", ability: "Beginner"},
-    {name: "W", ability: "Competent"},
-    {name: "X", ability: "Beginner"},
-    {name: "Y", ability: "Proficient"},
-    {name: "Z", ability: "Beginner"},
+    {name: "Rupal", ability: "Beginner"},
+    {name: "Chetan", ability: "Proficient"},
+    {name: "Roshan", ability: "Intermediate"},
+    {name: "Daniel", ability: "Beginner"},
+    {name: "Shrenik", ability: "Competent"},
+    {name: "Mansoor", ability: "Beginner"},
+    {name: "Dhruv", ability: "Proficient"},
+    {name: "Anirudh", ability: "Beginner"},
 ]
 
 const initialState: PlayerState = {

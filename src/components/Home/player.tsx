@@ -23,12 +23,14 @@ const Container = styled.div`
 const PlayerName = styled.label`
     float: left;
     margin-left: 20px;
+    width: 80px;
     
 `;
 
 const PlayerAbility = styled.label`
     float: left;
-    margin-left: 30px;
+    margin-left: 10px;
+    width: 100px;
     
 `;
 
