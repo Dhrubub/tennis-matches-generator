@@ -17,10 +17,10 @@ interface Set {
     }
 }
 
-interface ListPlayersProps {
-    fetchPlayers: () => void;
-    playerList: Player[];
-    changeTab: () => void;
+interface Pair {
+    playerOne: PlayerWithRating,
+    playerTwo: PlayerWithRating,
+
 }
 
 interface PlayerWithRating {
@@ -28,11 +28,19 @@ interface PlayerWithRating {
     ability: any,
 }
 
+interface ListPlayersProps {
+    fetchPlayers: () => void;
+    playerList: Player[];
+    changeTab: () => void;
+}
+
+
 const Matches = (props: ListPlayersProps) => {
     const LIMIT = 0;
     const [shuffledList, setShuffledList] = useState<Array<PlayerWithRating>>([])
     const [set, setSet] = useState<Set>()
     const [setUp, setSetUp] = useState<Array<Set>>([])
+    const [sortedList, setSortedList] = useState<Array<Pair>>([])
 
     //  RANDOMLY SORT THE PLAYERS INTO A LIST
     //==========================================================
@@ -80,82 +88,92 @@ const Matches = (props: ListPlayersProps) => {
         return tempList;
     }
 
+
+    //==========================================================
+
+    //  SELECT PAIRS
+    //==========================================================
+    const selectPairs = (playerList: PlayerWithRating[]) => {
+        let pairsList: Pair[] = []
+        for (let i = 0 ; i < playerList.length ; i++) {
+            let tempPair = {
+                playerOne: playerList[i],
+                playerTwo: playerList[i+1],
+            }
+            pairsList = [...pairsList, tempPair]
+            i++;
+        }
+
+        return pairsList
+    }
+
+    const createSets = (pairsList: Pair[]) => {
+        return quickSort(pairsList, 0, pairsList.length - 1);
+    }
+
+    const createMatches = (pairsList: Pair[]) => {
+        let setUp: Set[] = []
+        for (let i = 0 ; i < pairsList.length ; i++) {
+            let match = {
+                teamOne: {
+                    ...pairsList[i]
+                },
+                teamTwo: {
+                    ...pairsList[i+1]
+                }
+            }
+            setUp = [...setUp, match]
+            i++;
+        }
+        return setUp
+
+    }
+
+    function quickSort(items: Pair[], left: number, right: number) {
+        
+        if (left < right) {
+			let q = partition(items, left, right);
+			quickSort(items, left, right-1);
+			quickSort(items, q + 1, right);
+		}
+		return items;
+        
+
+    }
+
+    function partition(items: Pair[], left: number, right: number) {
+        let i = left - 1;
+        let pivot = items[right];
+        console.log(items)
+
+		for (let j = left; j < right ; j++ ) {
+			if (items[j].playerOne.ability + items[j].playerTwo.ability > items[right].playerOne.ability + items[right].playerTwo.ability) {
+				i++;
+				let temp = items[j];
+				items[j] = items[i];
+				items[i] = temp;	
+			}
+		}
+		for (let x = right ; x > i + 1 ; x--) {
+			items[x] = items[x-1];
+		}
+		
+		items[i + 1] = pivot;
+		return i + 1;
+
+    }
+
     useEffect(() => {
         setShuffledList(shufflePlayers())
     }, [props.playerList]) 
-    //==========================================================
-
-    //  SELECT A SET
-    //==========================================================
-    const selectSet = (setList: PlayerWithRating[]) => {
-        let list = [...setList]
-        let set: Set = {
-                teamOne: {
-                    playerOne: {name: "", ability: {}},
-                    playerTwo: {name: "", ability: {}},
-                },
-                teamTwo: {
-                    playerOne: {name: "", ability: {}},
-                    playerTwo: {name: "", ability: {}},
-                }
-        }
-
-        // while (Math.abs(set.teamOne.playerOne.ability + set.teamOne.playerTwo.ability - 
-        //     set.teamTwo.playerOne.ability + set.teamTwo.playerTwo.ability) <= LIMIT) 
-
-        set.teamOne.playerOne = list[0];
-            // setSet({
-            //     teamOne: {
-            //         playerOne: shuffledList[i * 4 + 0],
-            //         playerTwo: shuffledList[i * 4 + 1],
-            //     },
-            //     teamTwo: {
-            //         playerOne: shuffledList[i * 4 + 2],
-            //         playerTwo: shuffledList[i * 4 + 3],
-            //     }
-            // })
-
-
-
-            return list
-
-    }
-
-    const checkSet = (set: Set) => {
-
-
-    }
-
-    const createSets = () => {
-        let set = selectSet(shuffledList)
-
-    }
 
     useEffect(() => {
-        let numSets = shuffledList.length / 4;
-        console.log(numSets)
-        for (let i = 0 ; i < numSets ; i++) {
-
-            
-
-
-
-            setSetUp((prevState) => [
-                ...prevState, {
-                teamOne: {
-                    playerOne: shuffledList[i * 4 + 0],
-                    playerTwo: shuffledList[i * 4 + 1],
-                },
-                teamTwo: {
-                    playerOne: shuffledList[i * 4 + 2],
-                    playerTwo: shuffledList[i * 4 + 3],
-                }
-            }
-
-            ])
-        }
-        console.log(setUp)
+         setSortedList(createSets(selectPairs(shuffledList)))
     }, [shuffledList])
+
+    useEffect(() => {
+        setSetUp(createMatches(sortedList))
+    }, [sortedList])
     //==========================================================
 
 
