@@ -8,12 +8,12 @@ import styled from "styled-components";
 
 interface Set {
     teamOne: {
-        playerOne: Player,
-        playerTwo: Player,
+        playerOne: PlayerWithRating,
+        playerTwo: PlayerWithRating,
     },
     teamTwo: {
-        playerOne: Player,
-        playerTwo: Player,
+        playerOne: PlayerWithRating,
+        playerTwo: PlayerWithRating,
     }
 }
 
@@ -29,6 +29,7 @@ interface PlayerWithRating {
 }
 
 const Matches = (props: ListPlayersProps) => {
+    const LIMIT = 0;
     const [shuffledList, setShuffledList] = useState<Array<PlayerWithRating>>([])
     const [set, setSet] = useState<Set>()
     const [setUp, setSetUp] = useState<Array<Set>>([])
@@ -84,19 +85,39 @@ const Matches = (props: ListPlayersProps) => {
     }, [props.playerList]) 
     //==========================================================
 
-    //  SELECT THE FIRST SET
+    //  SELECT A SET
     //==========================================================
-    const selectSet = (i: number) => {
-            setSet({
+    const selectSet = (setList: PlayerWithRating[]) => {
+        let list = [...setList]
+        let set: Set = {
                 teamOne: {
-                    playerOne: shuffledList[i * 4 + 0],
-                    playerTwo: shuffledList[i * 4 + 1],
+                    playerOne: {name: "", ability: {}},
+                    playerTwo: {name: "", ability: {}},
                 },
                 teamTwo: {
-                    playerOne: shuffledList[i * 4 + 2],
-                    playerTwo: shuffledList[i * 4 + 3],
+                    playerOne: {name: "", ability: {}},
+                    playerTwo: {name: "", ability: {}},
                 }
-            })
+        }
+
+        // while (Math.abs(set.teamOne.playerOne.ability + set.teamOne.playerTwo.ability - 
+        //     set.teamTwo.playerOne.ability + set.teamTwo.playerTwo.ability) <= LIMIT) 
+
+        set.teamOne.playerOne = list[0];
+            // setSet({
+            //     teamOne: {
+            //         playerOne: shuffledList[i * 4 + 0],
+            //         playerTwo: shuffledList[i * 4 + 1],
+            //     },
+            //     teamTwo: {
+            //         playerOne: shuffledList[i * 4 + 2],
+            //         playerTwo: shuffledList[i * 4 + 3],
+            //     }
+            // })
+
+
+
+            return list
 
     }
 
@@ -105,12 +126,17 @@ const Matches = (props: ListPlayersProps) => {
 
     }
 
+    const createSets = () => {
+        let set = selectSet(shuffledList)
+
+    }
+
     useEffect(() => {
-        const numSets = shuffledList.length / 4;
+        let numSets = shuffledList.length / 4;
         console.log(numSets)
         for (let i = 0 ; i < numSets ; i++) {
 
-            selectSet(i)
+            
 
 
 
