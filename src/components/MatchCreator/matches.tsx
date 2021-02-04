@@ -144,7 +144,6 @@ const Matches = (props: ListPlayersProps) => {
     function partition(items: Pair[], left: number, right: number) {
         let i = left - 1;
         let pivot = items[right];
-        console.log(items)
 
 		for (let j = left; j < right ; j++ ) {
 			if (items[j].playerOne.ability + items[j].playerTwo.ability > items[right].playerOne.ability + items[right].playerTwo.ability) {
@@ -174,14 +173,22 @@ const Matches = (props: ListPlayersProps) => {
     useEffect(() => {
         setSetUp(createMatches(sortedList))
     }, [sortedList])
+
+    useEffect(() => {
+        console.log(setUp)
+    }, [setUp])
     //==========================================================
 
 
     return (
         <React.Fragment>
             <button onClick={props.changeTab}>Go Back</button>
+            <MatchesContainer>
+
+            <GridContainer>
+
             {setUp ? 
-                <div>
+                <Grid>
                     {setUp.map((set, id) => (
                         <IndividualSet key={id}>
                             <Label>Set {id + 1}</Label>
@@ -197,8 +204,10 @@ const Matches = (props: ListPlayersProps) => {
                             </Teams>
                         </IndividualSet>
                     ))} 
-                </div>
+                </Grid>
             : null}
+            </GridContainer>
+            </MatchesContainer>
         </React.Fragment>
         
     );
@@ -221,23 +230,46 @@ function mapDispatchToProps(dispatch: any) {
             dispatch(fetchPlayersAction())
         }
     }
-
+    
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Matches);
 
-const IndividualSet = styled.div`
-    background-color: peachpuff; 
-    width: fit-content; 
-    padding: 10px;
+const MatchesContainer = styled.div`
+`;
+
+const GridContainer = styled.div`
+    width: fit-content;
     margin: auto;
+
+`;
+
+const Grid = styled.div`
+    width: fit-content;
+    margin: auto;
+
+`;
+
+const IndividualSet = styled.div`
+    background-color: red; 
+    width: 40vw;
+    min-height: calc(50vh - 30px);
+    margin: auto;
+    //margin: 30px;
+    margin-left: 6vw;
     margin-bottom: 10px;
+
+    display: inline-block;
+
+    border-radius: 6px;
 `;
 
 const Teams = styled.div`
-    background-color: blue;
+    background-color: #000000;
     width: fit-content; 
     padding: 10px;  
+
+    margin: auto;
 `;
 
 const Label = styled.div`
@@ -246,5 +278,8 @@ const Label = styled.div`
     width: fit-content;
     padding: 5px;
 `;
+
+
+
 
 

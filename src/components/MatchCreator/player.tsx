@@ -1,6 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from "react-redux";
+
+interface PlayerProps {
+    name: string,
+    ability: string,
+    id: number
+}
+
+const Player = (props: PlayerProps) => {
+    return (
+        <Container>
+            <Name>{ props.name }</Name>
+        </Container>
+        
+    );
+}
+
+export default Player;
 
 const Container = styled.div`
     display: block;
@@ -16,27 +32,23 @@ const Container = styled.div`
     z-index: 1000;
 
     margin: auto;
-    margin-bottom: 20px;
+    margin: 20px; 
 `;
 
-interface PlayerProps {
-    name: string,
-    ability: string,
-    id: number
-}
+const Name = styled.div`
+    border: 1px solid gray;
+    width: fit-content;
+    padding: 5px;
 
-const Player = (props: PlayerProps) => {
-    return (
-        <Container>
-            { props.name }
-            <br />
-            { props.ability }
-            <br />
-        </Container>
-        
-    );
-}
+    border-radius: 6px;
 
+`;
 
+const Ability = styled.div`
+    border: 1px solid gray;
+    width: fit-content;
+    padding: 5px;
 
-export default Player;
+    border-radius: 6px;
+    
+`;

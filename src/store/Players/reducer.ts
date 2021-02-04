@@ -14,14 +14,27 @@ interface PlayerState {
 }
 
 const testList = [
-    {name: "Rupal", ability: "Beginner"},
-    {name: "Chetan", ability: "Proficient"},
-    {name: "Roshan", ability: "Intermediate"},
-    {name: "Daniel", ability: "Beginner"},
-    {name: "Shrenik", ability: "Competent"},
-    {name: "Mansoor", ability: "Beginner"},
     {name: "Dhruv", ability: "Proficient"},
-    {name: "Anirudh", ability: "Beginner"},
+    {name: "Shrenik", ability: "Proficient"},
+    {name: "Roshan", ability: "Competent"},
+    {name: "Daniel", ability: "Competent"},
+
+    {name: "Mansoor", ability: "Proficient"},
+    {name: "Anirudh", ability: "Proficient"},
+    {name: "Ray L", ability: "Proficient"},
+    {name: "Thushara", ability: "Proficient"},
+
+    {name: "Derrick", ability: "Competent"},
+    {name: "Ken", ability: "Competent"},
+    {name: "Frankie", ability: "Intermediate"},
+    {name: "Azia", ability: "Intermediate"},
+    
+    {name: "Harsh", ability: "Intermediate"},
+    {name: "Saad", ability: "Intermediate"},
+    {name: "Melissa", ability: "Beginner"},
+    {name: "Mustafa", ability: "Beginner"},
+
+
 ]
 
 const initialState: PlayerState = {

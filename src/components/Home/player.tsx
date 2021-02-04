@@ -3,38 +3,6 @@ import styled from 'styled-components';
 import { connect } from "react-redux";
 import { removePlayerAction } from "../../store/Players/actions"
 
-const Container = styled.div`
-    display: block;
-    border-radius: 20px;
-    color: white;
-    background-color: skyblue;
-    
-    height: fit-content;
-    word-wrap: break-word;
-
-    width: 500px;
-    padding: 10px;
-    z-index: 1000;
-
-    margin: auto;
-    margin-bottom: 20px;
-`;
-
-const PlayerName = styled.label`
-    float: left;
-    margin-left: 20px;
-    width: 80px;
-    
-`;
-
-const PlayerAbility = styled.label`
-    float: left;
-    margin-left: 10px;
-    width: 100px;
-    
-`;
-
-
 interface PlayerProps {
     name: string,
     ability: string,
@@ -75,5 +43,35 @@ function mapDispatchToProps(dispatch: any) {
 
 }
 
-
 export default connect(null, mapDispatchToProps)(Player);
+
+const Container = styled.div`
+    display: block;
+    border-radius: 20px;
+    color: white;
+    background-color: skyblue;
+    
+    height: fit-content;
+    word-wrap: break-word;
+
+    width: 500px;
+    padding: 10px;
+    z-index: 1000;
+
+    margin: auto;
+    margin-bottom: 20px;
+`;
+
+const PlayerName = styled.label`
+    float: left;
+    margin-left: 20px;
+    width: 80px;
+    
+`;
+
+const PlayerAbility = styled.label`
+    float: left;
+    margin-left: 10px;
+    width: 100px;
+    
+`;
