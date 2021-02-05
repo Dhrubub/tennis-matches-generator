@@ -67,6 +67,7 @@ const Matches = (props: ListPlayersProps) => {
                     tempList[count].ability = 4;
                     break;
                 default:
+                    tempList[count].ability = 0;
                     break;
             }
 
@@ -191,7 +192,9 @@ const Matches = (props: ListPlayersProps) => {
                 <Grid>
                     {setUp.map((set, id) => (
                         <IndividualSet key={id}>
-                            <Label>Set {id + 1}</Label>
+                            <Label>Court {8 - id}</Label>
+                            <TeamsContainer>
+
                             <Teams>
                                 <Player id={id} name={set.teamOne.playerOne.name} ability={set.teamOne.playerOne.ability}/>
                                 <Player id={id} name={set.teamOne.playerTwo.name} ability={set.teamOne.playerTwo.ability}/>
@@ -199,9 +202,10 @@ const Matches = (props: ListPlayersProps) => {
                             
                             <Label>Vs</Label>
                             <Teams>
-                                <Player id={id} name={set.teamTwo.playerOne.name} ability={set.teamTwo.playerOne.ability}/>
-                                <Player id={id} name={set.teamTwo.playerTwo.name} ability={set.teamTwo.playerTwo.ability}/>
+                                <Player className="second" id={id} name={set.teamTwo.playerOne.name} ability={set.teamTwo.playerOne.ability}/>
+                                <Player className="second" id={id} name={set.teamTwo.playerTwo.name} ability={set.teamTwo.playerTwo.ability}/>
                             </Teams>
+                            </TeamsContainer>
                         </IndividualSet>
                     ))} 
                 </Grid>
@@ -248,35 +252,50 @@ const Grid = styled.div`
     width: fit-content;
     margin: auto;
 
+    display: grid;
+
+    grid-template-columns: 50vw 1fr;
+
 `;
 
 const IndividualSet = styled.div`
-    background-color: red; 
-    width: 40vw;
-    min-height: calc(50vh - 30px);
-    margin: auto;
-    //margin: 30px;
-    margin-left: 6vw;
-    margin-bottom: 10px;
+    // background-color: red; 
+    // width: 40vw;
+    // min-width: 200px;
+    // min-height: calc(50vh - 30px);
+    // margin: auto;
+    // margin: 30px;
+    // //margin-left: 6vw;
+    // //margin-bottom: 10px;
 
-    display: inline-block;
+    // display: inline-block;
 
-    border-radius: 6px;
+    // border-radius: 6px;
+
+    // text-align: left;
+`;
+
+const TeamsContainer = styled.div`
+    // background-color: #000000;
+    // //width: 80%; 
+    // padding: 10px;  
+
+    // margin: auto;
 `;
 
 const Teams = styled.div`
-    background-color: #000000;
-    width: fit-content; 
-    padding: 10px;  
+    // background-color: blue;
+    // width: fit-content; 
+    // padding: 10px 50px;  
 
-    margin: auto;
+    // margin: auto;
 `;
 
 const Label = styled.div`
-    color: black;
-    margin: auto;
-    width: fit-content;
-    padding: 5px;
+    // color: black;
+    // margin: auto;
+    // width: fit-content;
+    // padding: 5px;
 `;
 
 

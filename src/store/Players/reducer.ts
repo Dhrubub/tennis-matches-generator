@@ -17,7 +17,7 @@ const testList = [
     {name: "Dhruv", ability: "Proficient"},
     {name: "Shrenik", ability: "Proficient"},
     {name: "Roshan", ability: "Competent"},
-    {name: "Daniel", ability: "Competent"},
+    {name: "Daniel", ability: "Proficient"},
 
     {name: "Mansoor", ability: "Proficient"},
     {name: "Anirudh", ability: "Proficient"},
@@ -28,12 +28,21 @@ const testList = [
     {name: "Ken", ability: "Competent"},
     {name: "Frankie", ability: "Intermediate"},
     {name: "Azia", ability: "Intermediate"},
-    
+
     {name: "Harsh", ability: "Intermediate"},
     {name: "Saad", ability: "Intermediate"},
     {name: "Melissa", ability: "Beginner"},
     {name: "Mustafa", ability: "Beginner"},
 
+    {name: "Terry", ability: "Competent"},
+    {name: "Jay", ability: "Competent"},
+    {name: "Ray R", ability: "Proficient"},
+    {name: "Jonathan", ability: "Proficient"},
+
+    {name: "Yuji", ability: "Proficient"},
+    {name: "Manoj", ability: "Competent"},
+    {name: "Anubhav", ability: "Intermediate"},
+    {name: "Geoff", ability: "Competent"},
 
 ]
 
