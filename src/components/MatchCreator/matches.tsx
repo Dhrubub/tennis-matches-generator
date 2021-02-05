@@ -240,6 +240,15 @@ function mapDispatchToProps(dispatch: any) {
 export default connect(mapStateToProps, mapDispatchToProps)(Matches);
 
 const MatchesContainer = styled.div`
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    text-align: center;
+
+    left: 0;
+    right: 0;
+    top: 50px;
+    bottom: 0;
 `;
 
 const GridContainer = styled.div`
@@ -254,7 +263,8 @@ const Grid = styled.div`
 
     display: grid;
 
-    grid-template-columns: 50vw 1fr;
+    grid-template-columns: 1fr 1fr;
+
 
 `;
 
@@ -273,6 +283,11 @@ const IndividualSet = styled.div`
     // border-radius: 6px;
 
     // text-align: left;
+
+    margin: 10px;
+    padding: 20px;
+
+    background-color: red;
 `;
 
 const TeamsContainer = styled.div`

@@ -40,8 +40,10 @@ const Container = styled.div`
     // margin: 20px; 
 
     width: 40vw;
-    padding: 20px;
+    padding: 20px 0px;
 
+
+    margin: auto;
     background-image: linear-gradient(135deg, lightgrey 50% , grey 100% );
     color: black;
 
