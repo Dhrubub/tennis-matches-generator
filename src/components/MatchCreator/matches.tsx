@@ -287,7 +287,7 @@ const IndividualSet = styled.div`
     margin: 10px;
     padding: 20px;
 
-    background-color: red;
+    background-image: linear-gradient(135deg, tomato 20%, salmon 100%);
 `;
 
 const TeamsContainer = styled.div`
