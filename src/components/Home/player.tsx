@@ -54,9 +54,10 @@ const Container = styled.div`
     height: fit-content;
     word-wrap: break-word;
 
-    width: 500px;
     padding: 10px;
     z-index: 1000;
+
+    width: fit-content;
 
     margin: auto;
     margin-bottom: 20px;
@@ -65,6 +66,7 @@ const Container = styled.div`
 const PlayerName = styled.label`
     float: left;
     margin-left: 20px;
+    margin-right: 10vw;
     width: 80px;
     
 `;

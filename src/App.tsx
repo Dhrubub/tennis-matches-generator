@@ -22,15 +22,25 @@ const App = () => {
   const [tab, setTab] = useState<Tab>(Tab.HOME)
   return (
     <Provider store={store}>
+      <Container>
+
       { tab === Tab.HOME ? 
         <Home changeTab={()=>setTab(Tab.MATCH_CREATOR)}/>
-      :null}
+        :null}
 
       { tab === Tab.MATCH_CREATOR ? 
         <MatchCreator changeTab={()=>setTab(Tab.HOME)}/>
-      :null}
+        :null}
+      </Container>
     </Provider>
   );
 }
 
 export default App;
+
+const Container = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  
+`

@@ -39,8 +39,8 @@ const Container = styled.div`
     // margin: auto;
     // margin: 20px; 
 
-    width: 40vw;
-    padding: 20px 0px;
+    //width: 40vw;
+    padding: 20px 5vw;
 
 
     margin: auto;
