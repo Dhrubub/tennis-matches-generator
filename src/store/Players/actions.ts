@@ -1,10 +1,9 @@
-import {actionTypes as at} from "./constants"
+import { actionTypes as at } from "./constants";
 
 export interface Player {
-    name: string,
-    ability: string,
+  name: string;
+  ability: string;
 }
-
 
 // export function fetchPlayersBeginAction() {
 //     return (dispatch: any) => {
@@ -22,41 +21,39 @@ export interface Player {
 // }
 
 export const fetchPlayersBeginAction = () => {
-    // return dispatch(
-    //     fetch('https://jsonplaceholder.typicode.com/posts').then(res => {
-    //         dispatch(fetchPlayersSuccessAction(([{name: 'Chris', ability: "Nothing"}]))
-    //     )})
-    // )
-    return {
-        type: at.FETCH_PLAYERS_BEGIN,
-    }
-}
+  // return dispatch(
+  //     fetch('https://jsonplaceholder.typicode.com/posts').then(res => {
+  //         dispatch(fetchPlayersSuccessAction(([{name: 'Chris', ability: "Nothing"}]))
+  //     )})
+  // )
+  return {
+    type: at.FETCH_PLAYERS_BEGIN,
+  };
+};
 
-export const fetchPlayersSuccessAction = (players: Player[]) =>{
-    return {
-        type: at.FETCH_PLAYERS_SUCCESS,
-        payload: players
-    }
-}
+export const fetchPlayersSuccessAction = (players: Player[]) => {
+  return {
+    type: at.FETCH_PLAYERS_SUCCESS,
+    payload: players,
+  };
+};
 
 export const fetchPlayersAction = () => {
-    return {
-        type: at.FETCH_PLAYERS,
-    }
-}
+  return {
+    type: at.FETCH_PLAYERS,
+  };
+};
 
 export const addPlayerAction = (player: Player) => {
-    return {
-        type: at.ADD_PLAYER,
-        payload: player, 
-    };
-    
+  return {
+    type: at.ADD_PLAYER,
+    payload: player,
+  };
 };
 
 export const removePlayerAction = (index: number) => {
-    return {
-        type: at.REMOVE_PLAYER,
-        payload: index, 
-    };
-    
+  return {
+    type: at.REMOVE_PLAYER,
+    payload: index,
+  };
 };

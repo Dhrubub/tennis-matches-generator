@@ -1,5 +1,3 @@
 export const selectPlayers = (state: any) => {
-    return state.player.playerList;
-
-
-}
+  return state.player.playerList;
+};
