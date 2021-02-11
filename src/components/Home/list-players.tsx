@@ -5,9 +5,11 @@ import { selectPlayers } from "../../store/Players/selector";
 import { fetchPlayersAction } from "../../store/Players/actions";
 import Player from "./player";
 
+import { PlayerProps } from "../../store/Players/actions";
+
 interface ListPlayersProps {
   fetchPlayers: () => void;
-  playerList: Player[];
+  playerList: PlayerProps[];
 }
 const ListPlayers = (props: ListPlayersProps) => {
   useEffect(() => {
@@ -23,6 +25,7 @@ const ListPlayers = (props: ListPlayersProps) => {
             id={id}
             name={player.name}
             ability={player.ability}
+            active={player.active}
           />
         ))
         .reverse()}
@@ -34,11 +37,6 @@ function mapStateToProps(state: any) {
   return {
     playerList: selectPlayers(state),
   };
-}
-
-interface Player {
-  name: string;
-  ability: string;
 }
 
 function mapDispatchToProps(dispatch: any) {

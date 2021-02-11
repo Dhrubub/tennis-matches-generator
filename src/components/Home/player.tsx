@@ -1,12 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { removePlayerAction } from "../../store/Players/actions";
+import {
+  removePlayerAction,
+  toggleActiveAction,
+} from "../../store/Players/actions";
 
 interface PlayerProps {
   name: string;
   ability: string;
+  active: boolean;
   removePlayer: (key: number) => void;
+  toggleActive: (key: number) => void;
   id: number;
 }
 
@@ -14,14 +19,20 @@ const Player = (props: PlayerProps) => {
   const handleRemove = () => {
     props.removePlayer(props.id);
   };
+
+  const toggleActive = () => {
+    props.toggleActive(props.id);
+  };
+
   return (
-    <Container>
+    <Container className={props.active ? "active" : "inactive"}>
       <PlayerName>{props.name}</PlayerName>
 
       <PlayerAbility>{props.ability}</PlayerAbility>
       <br />
       <br />
       <button onClick={handleRemove}>Remove</button>
+      <button onClick={toggleActive}>Toggle</button>
     </Container>
   );
 };
@@ -30,6 +41,10 @@ function mapDispatchToProps(dispatch: any) {
   return {
     removePlayer: (id: number): void => {
       dispatch(removePlayerAction(id));
+    },
+
+    toggleActive: (id: number): void => {
+      dispatch(toggleActiveAction(id));
     },
   };
 }
@@ -52,6 +67,14 @@ const Container = styled.div`
 
   margin: auto;
   margin-bottom: 20px;
+
+  &.active {
+    background-color: green;
+  }
+
+  &.inactive {
+    background-color: red;
+  }
 `;
 
 const PlayerName = styled.label`

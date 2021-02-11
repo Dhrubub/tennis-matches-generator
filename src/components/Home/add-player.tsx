@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { addPlayerAction, Player } from "../../store/Players/actions";
+import { addPlayerAction, PlayerProps } from "../../store/Players/actions";
 import { selectPlayers } from "../../store/Players/selector";
 
 const Container = styled.div`
@@ -49,8 +49,8 @@ const Option = styled.option`
 `;
 
 interface AddPlayerProps {
-  addPlayer: (player: Player) => void;
-  playerList: Player[];
+  addPlayer: (player: PlayerProps) => void;
+  playerList: PlayerProps[];
   changeTab: () => void;
 }
 
@@ -58,9 +58,10 @@ const AddPlayer = (props: AddPlayerProps) => {
   const [name, setName] = useState("");
   const [ability, setAbility] = useState("Beginner");
 
-  const [player, setPlayer] = useState<Player>({
+  const [player, setPlayer] = useState<PlayerProps>({
     name: "",
     ability: "Beginner",
+    active: true,
   });
 
   const editName = (inputName: string) => {
@@ -74,7 +75,8 @@ const AddPlayer = (props: AddPlayerProps) => {
   }, [name, ability]);
 
   useEffect(() => {
-    setPlayer({ name, ability });
+    const active = true;
+    setPlayer({ name, ability, active });
   }, [name, ability]);
 
   const checkRepeated = () => {
@@ -161,7 +163,7 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    addPlayer: (player: Player): void => {
+    addPlayer: (player: PlayerProps): void => {
       dispatch(addPlayerAction(player));
     },
   };
