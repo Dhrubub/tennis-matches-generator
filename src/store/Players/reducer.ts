@@ -129,7 +129,7 @@ export default (state = initialState, action: Action) => {
         }),
 
         activeList: state.activeList.filter(
-          (player, id) => id !== action.payload
+          (player, id) => id !== action.payload.index
         ),
       };
 
