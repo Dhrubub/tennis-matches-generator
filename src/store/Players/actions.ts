@@ -65,9 +65,22 @@ export const removePlayerAction = (index: number) => {
   };
 };
 
-export const toggleActiveAction = (index: number) => {
+export const toggleActiveAction = (player: PlayerProps, index: number) => {
   return {
     type: at.TOGGLE_ACTIVE,
-    payload: index,
+    payload: {
+      player,
+      index,
+    },
+  };
+};
+
+export const toggleInactiveAction = (player: PlayerProps, index: number) => {
+  return {
+    type: at.TOGGLE_INACTIVE,
+    payload: {
+      player,
+      index,
+    },
   };
 };

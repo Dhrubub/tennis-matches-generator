@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-import { selectPlayers } from "../../store/Players/selector";
-import { fetchAllPlayersAction } from "../../store/Players/actions";
+import { selectActivePlayers } from "../../store/Players/selector";
+import { fetchActivePlayersAction } from "../../store/Players/actions";
 import Player from "./player";
 import styled from "styled-components";
 
@@ -25,10 +25,11 @@ interface Pair {
 interface PlayerWithRating {
   name: string;
   ability: any;
+  active: boolean;
 }
 
 interface ListPlayersProps {
-  fetchAllPlayers: () => void;
+  fetchActivePlayers: () => void;
   playerList: Player[];
   changeTab: () => void;
 }
@@ -43,7 +44,8 @@ const Matches = (props: ListPlayersProps) => {
   //  RANDOMLY SORT THE PLAYERS INTO A LIST
   //==========================================================
   useEffect(() => {
-    props.fetchAllPlayers();
+    props.fetchActivePlayers();
+    console.log("fetching active players only");
   }, []);
 
   const shufflePlayers = () => {
@@ -161,6 +163,7 @@ const Matches = (props: ListPlayersProps) => {
 
   useEffect(() => {
     setShuffledList(shufflePlayers());
+    console.log(props.playerList);
   }, [props.playerList]);
 
   useEffect(() => {
@@ -228,19 +231,20 @@ const Matches = (props: ListPlayersProps) => {
 
 function mapStateToProps(state: any) {
   return {
-    playerList: selectPlayers(state),
+    playerList: selectActivePlayers(state),
   };
 }
 
 interface Player {
   name: string;
   ability: string;
+  active: boolean;
 }
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    fetchAllPlayers: (): void => {
-      dispatch(fetchAllPlayersAction());
+    fetchActivePlayers: (): void => {
+      dispatch(fetchActivePlayersAction());
     },
   };
 }

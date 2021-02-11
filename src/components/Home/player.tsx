@@ -4,14 +4,22 @@ import { connect } from "react-redux";
 import {
   removePlayerAction,
   toggleActiveAction,
+  toggleInactiveAction,
 } from "../../store/Players/actions";
+
+interface Player {
+  name: string;
+  ability: string;
+  active: boolean;
+}
 
 interface PlayerProps {
   name: string;
   ability: string;
   active: boolean;
   removePlayer: (key: number) => void;
-  toggleActive: (key: number) => void;
+  toggleActive: (player: Player, key: number) => void;
+  toggleInactive: (player: Player, key: number) => void;
   id: number;
 }
 
@@ -21,7 +29,17 @@ const Player = (props: PlayerProps) => {
   };
 
   const toggleActive = () => {
-    props.toggleActive(props.id);
+    if (props.active) {
+      props.toggleInactive(
+        { name: props.name, ability: props.ability, active: props.active },
+        props.id
+      );
+    } else {
+      props.toggleActive(
+        { name: props.name, ability: props.ability, active: props.active },
+        props.id
+      );
+    }
   };
 
   return (
@@ -43,8 +61,12 @@ function mapDispatchToProps(dispatch: any) {
       dispatch(removePlayerAction(id));
     },
 
-    toggleActive: (id: number): void => {
-      dispatch(toggleActiveAction(id));
+    toggleActive: (player: Player, id: number): void => {
+      dispatch(toggleActiveAction(player, id));
+    },
+
+    toggleInactive: (player: Player, id: number): void => {
+      dispatch(toggleInactiveAction(player, id));
     },
   };
 }

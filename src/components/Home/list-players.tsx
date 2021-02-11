@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import { selectPlayers } from "../../store/Players/selector";
+import { selectAllPlayers } from "../../store/Players/selector";
 import { fetchAllPlayersAction } from "../../store/Players/actions";
 import Player from "./player";
 
@@ -35,7 +35,7 @@ const ListPlayers = (props: ListPlayersProps) => {
 
 function mapStateToProps(state: any) {
   return {
-    playerList: selectPlayers(state),
+    playerList: selectAllPlayers(state),
   };
 }
 

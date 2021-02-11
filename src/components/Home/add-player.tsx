@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 
 import { addPlayerAction, PlayerProps } from "../../store/Players/actions";
-import { selectPlayers } from "../../store/Players/selector";
+import { selectAllPlayers } from "../../store/Players/selector";
+import { selectActivePlayers } from "../../store/Players/selector";
 
 const Container = styled.div`
   width: fit-content;
@@ -52,6 +53,7 @@ interface AddPlayerProps {
   addPlayer: (player: PlayerProps) => void;
   playerList: PlayerProps[];
   changeTab: () => void;
+  activeList: PlayerProps[];
 }
 
 const AddPlayer = (props: AddPlayerProps) => {
@@ -137,13 +139,13 @@ const AddPlayer = (props: AddPlayerProps) => {
         <button
           onClick={() => {
             if (
-              props.playerList.length % 4 === 0 &&
-              props.playerList.length !== 0
+              props.activeList.length % 4 === 0 &&
+              props.activeList.length !== 0
             ) {
               props.changeTab();
             } else {
               window.alert(
-                "Number of players must be greater 0 and divisible by 4"
+                "Number of active players must be greater 0 and divisible by 4"
               );
             }
           }}
@@ -157,7 +159,8 @@ const AddPlayer = (props: AddPlayerProps) => {
 
 function mapStateToProps(state: any) {
   return {
-    playerList: selectPlayers(state),
+    playerList: selectAllPlayers(state),
+    activeList: selectActivePlayers(state),
   };
 }
 

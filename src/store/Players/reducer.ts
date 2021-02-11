@@ -8,14 +8,15 @@ interface Action {
 
 interface PlayerState {
   playerList: PlayerProps[];
+  activeList: PlayerProps[];
   isLoading: boolean;
 }
 
 const testList = [
-  { name: "Dhruv", ability: "Proficient", active: false },
-  { name: "Shrenik", ability: "Proficient", active: false },
-  { name: "Roshan", ability: "Competent", active: false },
-  { name: "Daniel", ability: "Proficient", active: false },
+  { name: "Dhruv", ability: "Proficient", active: true },
+  { name: "Shrenik", ability: "Proficient", active: true },
+  { name: "Roshan", ability: "Competent", active: true },
+  { name: "Daniel", ability: "Proficient", active: true },
 
   { name: "Mansoor", ability: "Proficient", active: false },
   { name: "Anirudh", ability: "Proficient", active: false },
@@ -45,6 +46,12 @@ const testList = [
 
 const initialState: PlayerState = {
   playerList: testList,
+  activeList: [
+    { name: "Dhruv", ability: "Proficient", active: true },
+    { name: "Shrenik", ability: "Proficient", active: true },
+    { name: "Roshan", ability: "Competent", active: true },
+    { name: "Daniel", ability: "Proficient", active: true },
+  ],
   isLoading: false,
 };
 
@@ -68,6 +75,10 @@ export default (state = initialState, action: Action) => {
       return {
         ...state,
       };
+    case at.FETCH_ACTIVE_PLAYERS:
+      return {
+        ...state,
+      };
 
     case at.ADD_PLAYER:
       //console.log("adding");
@@ -75,6 +86,7 @@ export default (state = initialState, action: Action) => {
       return {
         ...state,
         playerList: [...state.playerList, action.payload],
+        activeList: [...state.activeList, action.payload],
       };
 
     case at.REMOVE_PLAYER:
@@ -83,17 +95,37 @@ export default (state = initialState, action: Action) => {
         playerList: state.playerList.filter(
           (player, id) => id !== action.payload
         ),
+        activeList: state.activeList.filter(
+          (player, id) => id !== action.payload
+        ),
       };
 
     case at.TOGGLE_ACTIVE:
       return {
         ...state,
         playerList: state.playerList.map((player, id) => {
-          if (id === action.payload) {
-            player.active = !player.active;
+          if (id === action.payload.index) {
+            player.active = true;
           }
           return player;
         }),
+
+        activeList: [...state.activeList, action.payload.player],
+      };
+
+    case at.TOGGLE_INACTIVE:
+      return {
+        ...state,
+        playerList: state.playerList.map((player, id) => {
+          if (id === action.payload.index) {
+            player.active = false;
+          }
+          return player;
+        }),
+
+        activeList: state.activeList.filter(
+          (player, id) => id !== action.payload
+        ),
       };
 
     default:
