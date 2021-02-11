@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { addPlayerAction, PlayerProps } from "../../store/Players/actions";
 import { selectAllPlayers } from "../../store/Players/selector";
 import { selectActivePlayers } from "../../store/Players/selector";
+import { toggleActiveAction } from "../../store/Players/actions";
 
 const Container = styled.div`
   width: fit-content;
@@ -54,6 +55,7 @@ interface AddPlayerProps {
   playerList: PlayerProps[];
   changeTab: () => void;
   activeList: PlayerProps[];
+  toggleActive: (player: PlayerProps, key: number) => void;
 }
 
 const AddPlayer = (props: AddPlayerProps) => {
@@ -65,6 +67,17 @@ const AddPlayer = (props: AddPlayerProps) => {
     ability: "Beginner",
     active: true,
   });
+
+  const toggleAllActive = () => {
+    props.playerList.map((player, id) => {
+      if (!player.active) {
+        props.toggleActive(
+          { name: player.name, ability: player.ability, active: true },
+          id
+        );
+      }
+    });
+  };
 
   const editName = (inputName: string) => {
     let name = inputName.trim().toLowerCase();
@@ -152,6 +165,8 @@ const AddPlayer = (props: AddPlayerProps) => {
         >
           Create Sets
         </button>
+
+        <button onClick={toggleAllActive}>Toggle All Active</button>
       </Container>
     </React.Fragment>
   );
@@ -168,6 +183,10 @@ function mapDispatchToProps(dispatch: any) {
   return {
     addPlayer: (player: PlayerProps): void => {
       dispatch(addPlayerAction(player));
+    },
+
+    toggleActive: (player: PlayerProps, index: number): void => {
+      dispatch(toggleActiveAction(player, index));
     },
   };
 }

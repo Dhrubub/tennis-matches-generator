@@ -13,10 +13,10 @@ interface PlayerState {
 }
 
 const testList = [
-  { name: "Dhruv", ability: "Proficient", active: true },
-  { name: "Shrenik", ability: "Proficient", active: true },
-  { name: "Roshan", ability: "Competent", active: true },
-  { name: "Daniel", ability: "Proficient", active: true },
+  { name: "Dhruv", ability: "Proficient", active: false },
+  { name: "Shrenik", ability: "Proficient", active: false },
+  { name: "Roshan", ability: "Competent", active: false },
+  { name: "Daniel", ability: "Proficient", active: false },
 
   { name: "Mansoor", ability: "Proficient", active: false },
   { name: "Anirudh", ability: "Proficient", active: false },
@@ -42,16 +42,21 @@ const testList = [
   { name: "Manoj", ability: "Competent", active: false },
   { name: "Anubhav", ability: "Intermediate", active: false },
   { name: "Geoff", ability: "Competent", active: false },
+
+  { name: "Anne", ability: "Beginner", active: false },
+  { name: "Jo", ability: "Competent", active: false },
+  { name: "Indrek", ability: "Competent", active: false },
+  { name: "Nish", ability: "Competent", active: false },
+
+  { name: "Yogesh", ability: "Beginner", active: false },
+  { name: "Dwight", ability: "Proficient", active: false },
+  { name: "Selva", ability: "Beginner", active: false },
+  { name: "Sathya", ability: "Beginner", active: false },
 ];
 
 const initialState: PlayerState = {
   playerList: testList,
-  activeList: [
-    { name: "Dhruv", ability: "Proficient", active: true },
-    { name: "Shrenik", ability: "Proficient", active: true },
-    { name: "Roshan", ability: "Competent", active: true },
-    { name: "Daniel", ability: "Proficient", active: true },
-  ],
+  activeList: [],
   isLoading: false,
 };
 

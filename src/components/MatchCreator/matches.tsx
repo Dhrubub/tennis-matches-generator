@@ -25,7 +25,6 @@ interface Pair {
 interface PlayerWithRating {
   name: string;
   ability: any;
-  active: boolean;
 }
 
 interface ListPlayersProps {
@@ -238,7 +237,6 @@ function mapStateToProps(state: any) {
 interface Player {
   name: string;
   ability: string;
-  active: boolean;
 }
 
 function mapDispatchToProps(dispatch: any) {
