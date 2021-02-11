@@ -7,49 +7,6 @@ import { selectAllPlayers } from "../../store/Players/selector";
 import { selectActivePlayers } from "../../store/Players/selector";
 import { toggleActiveAction } from "../../store/Players/actions";
 
-const Container = styled.div`
-  width: fit-content;
-  text-align: center;
-  margin: auto;
-  margin-bottom: 20px;
-  margin-top: 20px;
-`;
-
-const FormContainer = styled.div`
-  display: block;
-  border-radius: 6px;
-  color: white;
-  background-color: skyblue;
-
-  width: fit-content;
-  height: fit-content;
-  padding: 20px;
-
-  margin: auto;
-  margin-bottom: 20px;
-  margin-top: 20px;
-`;
-
-const Form = styled.form``;
-
-const Label = styled.label`
-  margin: 5px;
-`;
-
-const Input = styled.input`
-  margin: 5px;
-`;
-
-const Select = styled.select`
-  padding: 5px;
-  margin-right: 15px;
-  //background-color: lightgreen;
-`;
-
-const Option = styled.option`
-  //background-color: red;
-`;
-
 interface AddPlayerProps {
   addPlayer: (player: PlayerProps) => void;
   playerList: PlayerProps[];
@@ -192,3 +149,46 @@ function mapDispatchToProps(dispatch: any) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddPlayer);
+
+const Container = styled.div`
+  width: fit-content;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+`;
+
+const FormContainer = styled.div`
+  display: block;
+  border-radius: 6px;
+  color: white;
+  background-color: skyblue;
+
+  width: fit-content;
+  height: fit-content;
+  padding: 20px;
+
+  margin: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+`;
+
+const Form = styled.form``;
+
+const Label = styled.label`
+  margin: 5px;
+`;
+
+const Input = styled.input`
+  margin: 5px;
+`;
+
+const Select = styled.select`
+  padding: 5px;
+  margin-right: 15px;
+  //background-color: lightgreen;
+`;
+
+const Option = styled.option`
+  //background-color: red;
+`;
