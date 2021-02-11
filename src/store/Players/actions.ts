@@ -39,9 +39,15 @@ export const fetchPlayersSuccessAction = (players: PlayerProps[]) => {
   };
 };
 
-export const fetchPlayersAction = () => {
+export const fetchAllPlayersAction = () => {
   return {
-    type: at.FETCH_PLAYERS,
+    type: at.FETCH_ALL_PLAYERS,
+  };
+};
+
+export const fetchActivePlayersAction = () => {
+  return {
+    type: at.FETCH_ACTIVE_PLAYERS,
   };
 };
 

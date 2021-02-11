@@ -2,18 +2,18 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import { selectPlayers } from "../../store/Players/selector";
-import { fetchPlayersAction } from "../../store/Players/actions";
+import { fetchAllPlayersAction } from "../../store/Players/actions";
 import Player from "./player";
 
 import { PlayerProps } from "../../store/Players/actions";
 
 interface ListPlayersProps {
-  fetchPlayers: () => void;
+  fetchAllPlayers: () => void;
   playerList: PlayerProps[];
 }
 const ListPlayers = (props: ListPlayersProps) => {
   useEffect(() => {
-    props.fetchPlayers();
+    props.fetchAllPlayers();
   }, []);
 
   return (
@@ -41,8 +41,8 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    fetchPlayers: (): void => {
-      dispatch(fetchPlayersAction());
+    fetchAllPlayers: (): void => {
+      dispatch(fetchAllPlayersAction());
     },
   };
 }

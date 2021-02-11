@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import { selectPlayers } from "../../store/Players/selector";
-import { fetchPlayersAction } from "../../store/Players/actions";
+import { fetchAllPlayersAction } from "../../store/Players/actions";
 import Player from "./player";
 import styled from "styled-components";
 
@@ -28,7 +28,7 @@ interface PlayerWithRating {
 }
 
 interface ListPlayersProps {
-  fetchPlayers: () => void;
+  fetchAllPlayers: () => void;
   playerList: Player[];
   changeTab: () => void;
 }
@@ -43,7 +43,7 @@ const Matches = (props: ListPlayersProps) => {
   //  RANDOMLY SORT THE PLAYERS INTO A LIST
   //==========================================================
   useEffect(() => {
-    props.fetchPlayers();
+    props.fetchAllPlayers();
   }, []);
 
   const shufflePlayers = () => {
@@ -239,8 +239,8 @@ interface Player {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    fetchPlayers: (): void => {
-      dispatch(fetchPlayersAction());
+    fetchAllPlayers: (): void => {
+      dispatch(fetchAllPlayersAction());
     },
   };
 }

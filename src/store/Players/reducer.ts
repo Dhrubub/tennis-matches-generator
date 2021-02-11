@@ -63,9 +63,8 @@ export default (state = initialState, action: Action) => {
         playerList: action.payload,
       };
 
-    case at.FETCH_PLAYERS:
+    case at.FETCH_ALL_PLAYERS:
       //console.log("fetching");
-
       return {
         ...state,
       };
