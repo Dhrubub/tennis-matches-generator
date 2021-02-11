@@ -1,10 +1,10 @@
-import {actionTypes as at} from "./constants"
+import { actionTypes as at } from "./constants";
 
-export interface Player {
-    name: string,
-    ability: string,
+export interface PlayerProps {
+  name: string;
+  ability: string;
+  active: boolean;
 }
-
 
 // export function fetchPlayersBeginAction() {
 //     return (dispatch: any) => {
@@ -22,41 +22,65 @@ export interface Player {
 // }
 
 export const fetchPlayersBeginAction = () => {
-    // return dispatch(
-    //     fetch('https://jsonplaceholder.typicode.com/posts').then(res => {
-    //         dispatch(fetchPlayersSuccessAction(([{name: 'Chris', ability: "Nothing"}]))
-    //     )})
-    // )
-    return {
-        type: at.FETCH_PLAYERS_BEGIN,
-    }
-}
+  // return dispatch(
+  //     fetch('https://jsonplaceholder.typicode.com/posts').then(res => {
+  //         dispatch(fetchPlayersSuccessAction(([{name: 'Chris', ability: "Nothing"}]))
+  //     )})
+  // )
+  return {
+    type: at.FETCH_PLAYERS_BEGIN,
+  };
+};
 
-export const fetchPlayersSuccessAction = (players: Player[]) =>{
-    return {
-        type: at.FETCH_PLAYERS_SUCCESS,
-        payload: players
-    }
-}
+export const fetchPlayersSuccessAction = (players: PlayerProps[]) => {
+  return {
+    type: at.FETCH_PLAYERS_SUCCESS,
+    payload: players,
+  };
+};
 
-export const fetchPlayersAction = () => {
-    return {
-        type: at.FETCH_PLAYERS,
-    }
-}
+export const fetchAllPlayersAction = () => {
+  return {
+    type: at.FETCH_ALL_PLAYERS,
+  };
+};
 
-export const addPlayerAction = (player: Player) => {
-    return {
-        type: at.ADD_PLAYER,
-        payload: player, 
-    };
-    
+export const fetchActivePlayersAction = () => {
+  return {
+    type: at.FETCH_ACTIVE_PLAYERS,
+  };
+};
+
+export const addPlayerAction = (player: PlayerProps) => {
+  return {
+    type: at.ADD_PLAYER,
+    payload: player,
+  };
 };
 
 export const removePlayerAction = (index: number) => {
-    return {
-        type: at.REMOVE_PLAYER,
-        payload: index, 
-    };
-    
+  return {
+    type: at.REMOVE_PLAYER,
+    payload: index,
+  };
+};
+
+export const toggleActiveAction = (player: PlayerProps, index: number) => {
+  return {
+    type: at.TOGGLE_ACTIVE,
+    payload: {
+      player,
+      index,
+    },
+  };
+};
+
+export const toggleInactiveAction = (player: PlayerProps, index: number) => {
+  return {
+    type: at.TOGGLE_INACTIVE,
+    payload: {
+      player,
+      index,
+    },
+  };
 };
