@@ -89,14 +89,14 @@ const Container = styled.div`
   padding-right: 10px;
   z-index: 1000;
 
-  width: 100%;
-  max-width: 800px;
+  width: 90%;
 
   margin: auto;
 
-  margin-bottom: 20px;
+  //margin-bottom: 20px;
 
-  //box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.8);
+  box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.8);
+  //border: 1px solid black;
 
   &.active {
     //background-color: green;
@@ -135,7 +135,7 @@ const PlayerAbility = styled.label`
   display: inline-block;
   width: 30%;
 
-  margin-right: 20%;
+  margin-right: 15%;
 `;
 
 const Icon = styled.i`
