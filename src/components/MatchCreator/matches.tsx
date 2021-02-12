@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { selectActivePlayers } from "../../store/Players/selector";
 import { fetchActivePlayersAction } from "../../store/Players/actions";
-import Player from "./player-card";
+import PlayerCard from "./player-card";
 import styled from "styled-components";
 
 interface Set {
@@ -190,12 +190,12 @@ const Matches = (props: ListPlayersProps) => {
                   <Label>Court {8 - id}</Label>
                   <TeamsContainer>
                     <Teams>
-                      <Player
+                      <PlayerCard
                         id={id}
                         name={set.teamOne.playerOne.name}
                         ability={set.teamOne.playerOne.ability}
                       />
-                      <Player
+                      <PlayerCard
                         id={id}
                         name={set.teamOne.playerTwo.name}
                         ability={set.teamOne.playerTwo.ability}
@@ -204,13 +204,13 @@ const Matches = (props: ListPlayersProps) => {
 
                     <Label>Vs</Label>
                     <Teams>
-                      <Player
+                      <PlayerCard
                         className="second"
                         id={id}
                         name={set.teamTwo.playerOne.name}
                         ability={set.teamTwo.playerOne.ability}
                       />
-                      <Player
+                      <PlayerCard
                         className="second"
                         id={id}
                         name={set.teamTwo.playerTwo.name}
