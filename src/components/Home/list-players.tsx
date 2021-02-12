@@ -182,6 +182,7 @@ const Container = styled.div`
 `;
 
 const Select = styled.select`
+  position: relative;
   padding: 0px;
   margin-bottom: 10px;
   //background-color: lightgreen;
@@ -191,9 +192,11 @@ const Option = styled.option`
   //background-color: red;
 `;
 
-const Label = styled.option`
+const Label = styled.div`
+  position: relative;
   display: inline;
   margin-left: 5%;
   margin-right: 1%;
+  color: black;
   //background-color: red;
 `;
