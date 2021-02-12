@@ -11,6 +11,13 @@ import { selectAllPlayers } from "../../store/Players/selector";
 import { selectActivePlayers } from "../../store/Players/selector";
 import { toggleActiveAction } from "../../store/Players/actions";
 
+export enum AbilityTypes {
+  proficient = "Proficient",
+  competent = "Competent",
+  intermediate = "Intermediate",
+  beginner = "Beginner",
+}
+
 interface AddPlayer {
   addPlayer: (player: Player) => void;
   playerList: Player[];
@@ -121,10 +128,10 @@ const AddPlayer = (props: AddPlayer) => {
                 setAbility(e.target.value);
               }}
             >
-              <Option>Beginner</Option>
-              <Option>Intermediate</Option>
-              <Option>Competent</Option>
-              <Option>Proficient</Option>
+              <Option>{AbilityTypes.beginner}</Option>
+              <Option>{AbilityTypes.intermediate}</Option>
+              <Option>{AbilityTypes.competent}</Option>
+              <Option>{AbilityTypes.proficient}</Option>
             </Select>
             <button type="submit">Add Player</button>
           </Form>

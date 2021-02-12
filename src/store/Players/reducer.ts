@@ -1,6 +1,8 @@
 import { actionTypes as at } from "./constants";
 import { Player } from "./actions";
 
+import {AbilityTypes as ab} from "../../components/Home/add-player"
+
 interface Action {
   type: string;
   payload?: any;
@@ -13,45 +15,45 @@ interface PlayerState {
 }
 
 const testList = [
-  { name: "Dhruv", ability: "Proficient", active: false },
-  { name: "Shrenik", ability: "Proficient", active: false },
-  { name: "Roshan", ability: "Competent", active: false },
-  { name: "Daniel", ability: "Proficient", active: false },
+  { name: "Dhruv", ability: ab.proficient, active: false },
+  { name: "Shrenik", ability: ab.proficient, active: false },
+  { name: "Roshan", ability: ab.competent, active: false },
+  { name: "Daniel", ability: ab.proficient, active: false },
 
-  { name: "Mansoor", ability: "Proficient", active: false },
-  { name: "Anirudh", ability: "Proficient", active: false },
-  { name: "Ray L", ability: "Proficient", active: false },
-  { name: "Thushara", ability: "Proficient", active: false },
+  { name: "Mansoor", ability: ab.proficient, active: false },
+  { name: "Anirudh", ability: ab.proficient, active: false },
+  { name: "Ray L", ability: ab.proficient, active: false },
+  { name: "Thushara", ability: ab.proficient, active: false },
 
-  { name: "Derrick", ability: "Competent", active: false },
-  { name: "Ken", ability: "Competent", active: false },
-  { name: "Frankie", ability: "Intermediate", active: false },
-  { name: "Azia", ability: "Intermediate", active: false },
+  { name: "Derrick", ability: ab.competent, active: false },
+  { name: "Ken", ability: ab.competent, active: false },
+  { name: "Frankie", ability: ab.intermediate, active: false },
+  { name: "Azia", ability: ab.intermediate, active: false },
 
-  { name: "Harsh", ability: "Intermediate", active: false },
-  { name: "Saad", ability: "Intermediate", active: false },
-  { name: "Melissa", ability: "Beginner", active: false },
-  { name: "Mustafa", ability: "Beginner", active: false },
+  { name: "Harsh", ability: ab.intermediate, active: false },
+  { name: "Saad", ability: ab.intermediate, active: false },
+  { name: "Melissa", ability: ab.beginner, active: false },
+  { name: "Mustafa", ability: ab.beginner, active: false },
 
-  { name: "Terry", ability: "Competent", active: false },
-  { name: "Jay", ability: "Competent", active: false },
-  { name: "Ray R", ability: "Proficient", active: false },
-  { name: "Jonathan", ability: "Proficient", active: false },
+  { name: "Terry", ability: ab.competent, active: false },
+  { name: "Jay", ability: ab.competent, active: false },
+  { name: "Ray R", ability: ab.proficient, active: false },
+  { name: "Jonathan", ability: ab.proficient, active: false },
 
-  { name: "Yuji", ability: "Proficient", active: false },
-  { name: "Manoj", ability: "Competent", active: false },
-  { name: "Anubhav", ability: "Intermediate", active: false },
-  { name: "Geoff", ability: "Competent", active: false },
+  { name: "Yuji", ability: ab.proficient, active: false },
+  { name: "Manoj", ability: ab.competent, active: false },
+  { name: "Anubhav", ability: ab.intermediate, active: false },
+  { name: "Geoff", ability: ab.competent, active: false },
 
-  { name: "Anne", ability: "Beginner", active: false },
-  { name: "Jo", ability: "Competent", active: false },
-  { name: "Indrek", ability: "Competent", active: false },
-  { name: "Nish", ability: "Competent", active: false },
+  { name: "Anne", ability: ab.beginner, active: false },
+  { name: "Jo", ability: ab.beginner, active: false },
+  { name: "Indrek", ability: ab.competent, active: false },
+  { name: "Nish", ability: ab.competent, active: false },
 
-  { name: "Yogesh", ability: "Beginner", active: false },
-  { name: "Dwight", ability: "Proficient", active: false },
-  { name: "Selva", ability: "Beginner", active: false },
-  { name: "Sathya", ability: "Beginner", active: false },
+  { name: "Yogesh", ability: ab.beginner, active: false },
+  { name: "Dwight", ability: ab.proficient, active: false },
+  { name: "Selva", ability: ab.beginner, active: false },
+  { name: "Sathya", ability: ab.beginner, active: false },
 ];
 
 const initialState: PlayerState = {

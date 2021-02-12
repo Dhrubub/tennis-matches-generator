@@ -6,6 +6,8 @@ import { fetchActivePlayersAction } from "../../store/Players/actions";
 import PlayerCard from "./player-card";
 import styled from "styled-components";
 
+import {AbilityTypes as ab} from "../Home/add-player";
+
 interface Set {
   teamOne: {
     playerOne: PlayerWithRating;
@@ -54,16 +56,16 @@ const Matches = (props: ListPlayersProps) => {
 
     for (let count = 0; count < tempList.length; count++) {
       switch (tempList[count].ability) {
-        case "Beginner":
+        case ab.beginner:
           tempList[count].ability = 1;
           break;
-        case "Intermediate":
+        case ab.intermediate:
           tempList[count].ability = 2;
           break;
-        case "Competent":
+        case ab.competent:
           tempList[count].ability = 3;
           break;
-        case "Proficient":
+        case ab.proficient:
           tempList[count].ability = 4;
           break;
         default:
