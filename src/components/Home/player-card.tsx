@@ -47,10 +47,10 @@ const PlayerCard = (props: PlayerProps) => {
   };
 
   return (
-    <Container className={props.active ? "active" : "inactive"}>
+    <Container className={(props.active ? "active" : "inactive") + " " + (props.id % 2 === 0 ? "even" : "odd")}>
       <PlayerName>{props.name}</PlayerName>
 
-      <PlayerAbility>{props.ability}</PlayerAbility>
+      <PlayerAbility className="">{props.ability}</PlayerAbility>
       <Icon className={"toggle " + (props.active ? "fa fa-check-circle btn btn-success" : "fa fa-times-circle btn btn-danger")} onClick={toggleActive}/>
       <Icon className="remove fa fa-trash fa-2x btn btn-danger" onClick={handleRemove}/>
     </Container>
@@ -79,7 +79,8 @@ const Container = styled.div`
   display: block;
   //border-radius: 20px;
   color: black;
-  background-color: lightgrey;
+  //background-color: lightgrey;
+  //border: 1px solid grey;
 
   height: fit-content;
   word-wrap: break-word;
@@ -93,20 +94,28 @@ const Container = styled.div`
 
   margin: auto;
 
-  //margin-bottom: 20px;
+  margin-bottom: 20px;
 
   //box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.8);
 
   &.active {
     //background-color: green;
-    //background-image: linear-gradient(0deg, green 10%, lightgrey 40%);
-    border: 2px solid green;
+    background-image: linear-gradient(45deg, rgba(0,255,0,0.5) 40%, lightgrey 70%);
+    //border: 2px solid green;
   }
 
   &.inactive {
     //background-color: red;
-    //background-image: linear-gradient(0deg, red 10%, lightgrey 40%);
-    border: 2px solid red;
+    background-image: linear-gradient(45deg, rgba(255,0,0,0.5) 40%, lightgrey 70%);
+    //border: 2px solid red;
+  }
+
+  &.even {
+    //background-color: grey;
+  }
+
+  &.odd {
+    //background-color: lightgrey;
   }
 `;
 
