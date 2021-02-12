@@ -95,23 +95,19 @@ const Container = styled.div`
   box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.8);
 
   &.active {
-    //background-color: green;
-    background-image: linear-gradient(45deg, rgba(0,255,0,0.5) 40%, transparent 70%);
-    //border: 2px solid green;
+    background-image: linear-gradient(45deg, rgba(0,255,0,0.5) 60%, transparent 90%);
   }
 
   &.inactive {
-    //background-color: red;
-    background-image: linear-gradient(45deg, rgba(255,0,0,0.5) 40%, transparent 70%);
-    //border: 2px solid red;
+    background-image: linear-gradient(45deg, rgba(255,0,0,0.5) 60%, transparent 90%);
   }
 
   &.even {
-    background-color: rgba(220,220,220);
+    background-color: white;
   }
 
   &.odd {
-    background-color: rgba(240,240,240);
+    background-color: white;
   }
 `;
 
