@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import 'font-awesome/css/font-awesome.min.css';
+
 import {
   removePlayerAction,
   toggleActiveAction,
@@ -45,14 +47,12 @@ const PlayerCard = (props: PlayerProps) => {
   };
 
   return (
-    <Container className={props.active ? "active" : "inactive"}>
+    <Container className={(props.active ? "active" : "inactive") + " " + (props.id % 2 === 0 ? "even" : "odd")}>
       <PlayerName>{props.name}</PlayerName>
 
-      <PlayerAbility>{props.ability}</PlayerAbility>
-      <br />
-      <br />
-      <button onClick={handleRemove}>Remove</button>
-      <button onClick={toggleActive}>Toggle</button>
+      <PlayerAbility className="">{props.ability}</PlayerAbility>
+      <Icon className={"toggle " + (props.active ? "fa fa-check-circle btn btn-success" : "fa fa-times-circle btn btn-danger")} onClick={toggleActive}/>
+      <Icon className="remove fa fa-trash fa-2x btn btn-danger" onClick={handleRemove}/>
     </Container>
   );
 };
@@ -77,39 +77,70 @@ export default connect(null, mapDispatchToProps)(PlayerCard);
 
 const Container = styled.div`
   display: block;
-  border-radius: 20px;
-  color: white;
-  background-color: skyblue;
+  color: black;
 
   height: fit-content;
   word-wrap: break-word;
 
-  padding: 10px;
+  padding: 20px;
+  padding-right: 10px;
   z-index: 1000;
 
-  width: fit-content;
+  width: 90%;
 
   margin: auto;
-  margin-bottom: 20px;
+
+  margin-bottom: 10px;
+
+  box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.8);
 
   &.active {
-    background-color: green;
+    //background-color: green;
+    background-image: linear-gradient(45deg, rgba(0,255,0,0.5) 40%, transparent 70%);
+    //border: 2px solid green;
   }
 
   &.inactive {
-    background-color: red;
+    //background-color: red;
+    background-image: linear-gradient(45deg, rgba(255,0,0,0.5) 40%, transparent 70%);
+    //border: 2px solid red;
+  }
+
+  &.even {
+    background-color: rgb(135,206,235, 0.2);
+  }
+
+  &.odd {
+    background-color: rgb(135,206,235, 0.4);
   }
 `;
 
 const PlayerName = styled.label`
-  float: left;
-  margin-left: 20px;
+  display: inline-block;
   margin-right: 10vw;
-  width: 80px;
+  width: 20%;
+
+  font-weight: bold;
+
+  margin-right: 5%;
+
+  word-break: break-all;
 `;
 
 const PlayerAbility = styled.label`
-  float: left;
-  margin-left: 10px;
-  width: 100px;
+  display: inline-block;
+  width: 30%;
+
+  margin-right: 15%;
+`;
+
+const Icon = styled.i`
+  display: inline;
+  padding: 1% 2%;
+  font-size: 20px;
+
+  &.toggle {
+    margin-right: 20px;
+  }
+
 `;
