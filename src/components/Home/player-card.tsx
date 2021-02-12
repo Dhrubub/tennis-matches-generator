@@ -17,28 +17,30 @@ interface PlayerProps {
   name: string;
   ability: string;
   active: boolean;
-  removePlayer: (key: number) => void;
-  toggleActive: (player: Player, key: number) => void;
-  toggleInactive: (player: Player, key: number) => void;
+  removePlayer: (name: string) => void;
+  toggleActive: (player: Player) => void;
+  toggleInactive: (player: Player) => void;
   id: number;
 }
 
-const Player = (props: PlayerProps) => {
+const PlayerCard = (props: PlayerProps) => {
   const handleRemove = () => {
-    props.removePlayer(props.id);
+    props.removePlayer(props.name);
   };
 
   const toggleActive = () => {
     if (props.active) {
-      props.toggleInactive(
-        { name: props.name, ability: props.ability, active: props.active },
-        props.id
-      );
+      props.toggleInactive({
+        name: props.name,
+        ability: props.ability,
+        active: props.active,
+      });
     } else {
-      props.toggleActive(
-        { name: props.name, ability: props.ability, active: props.active },
-        props.id
-      );
+      props.toggleActive({
+        name: props.name,
+        ability: props.ability,
+        active: props.active,
+      });
     }
   };
 
@@ -57,21 +59,21 @@ const Player = (props: PlayerProps) => {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    removePlayer: (id: number): void => {
-      dispatch(removePlayerAction(id));
+    removePlayer: (name: string): void => {
+      dispatch(removePlayerAction(name));
     },
 
-    toggleActive: (player: Player, id: number): void => {
-      dispatch(toggleActiveAction(player, id));
+    toggleActive: (player: Player): void => {
+      dispatch(toggleActiveAction(player));
     },
 
-    toggleInactive: (player: Player, id: number): void => {
-      dispatch(toggleInactiveAction(player, id));
+    toggleInactive: (player: Player): void => {
+      dispatch(toggleInactiveAction(player));
     },
   };
 }
 
-export default connect(null, mapDispatchToProps)(Player);
+export default connect(null, mapDispatchToProps)(PlayerCard);
 
 const Container = styled.div`
   display: block;

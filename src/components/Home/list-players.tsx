@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 
 import { selectAllPlayers } from "../../store/Players/selector";
 import { fetchAllPlayersAction } from "../../store/Players/actions";
-import Player from "./player";
+import PlayerCard from "./player-card";
 
-import { PlayerProps } from "../../store/Players/actions";
+import { Player } from "../../store/Players/actions";
 
 interface ListPlayersProps {
   fetchAllPlayers: () => void;
-  playerList: PlayerProps[];
+  playerList: Player[];
 }
 const ListPlayers = (props: ListPlayersProps) => {
   useEffect(() => {
@@ -20,7 +20,7 @@ const ListPlayers = (props: ListPlayersProps) => {
     <React.Fragment>
       {props.playerList
         .map((player, id) => (
-          <Player
+          <PlayerCard
             key={id}
             id={id}
             name={player.name}

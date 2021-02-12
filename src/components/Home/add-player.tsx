@@ -2,38 +2,61 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { addPlayerAction, PlayerProps } from "../../store/Players/actions";
+import {
+  addPlayerAction,
+  Player,
+  toggleInactiveAction,
+} from "../../store/Players/actions";
 import { selectAllPlayers } from "../../store/Players/selector";
 import { selectActivePlayers } from "../../store/Players/selector";
 import { toggleActiveAction } from "../../store/Players/actions";
 
-interface AddPlayerProps {
-  addPlayer: (player: PlayerProps) => void;
-  playerList: PlayerProps[];
+interface AddPlayer {
+  addPlayer: (player: Player) => void;
+  playerList: Player[];
   changeTab: () => void;
-  activeList: PlayerProps[];
-  toggleActive: (player: PlayerProps, key: number) => void;
+  activeList: Player[];
+  toggleActive: (player: Player) => void;
+  toggleInactive: (player: Player) => void;
 }
 
-const AddPlayer = (props: AddPlayerProps) => {
+const AddPlayer = (props: AddPlayer) => {
   const [name, setName] = useState("");
   const [ability, setAbility] = useState("Beginner");
 
-  const [player, setPlayer] = useState<PlayerProps>({
+  const [player, setPlayer] = useState<Player>({
     name: "",
     ability: "Beginner",
     active: true,
   });
 
   const toggleAllActive = () => {
-    props.playerList.map((player, id) => {
+    props.playerList.map((player) => {
       if (!player.active) {
-        props.toggleActive(
-          { name: player.name, ability: player.ability, active: true },
-          id
-        );
+        props.toggleActive({
+          name: player.name,
+          ability: player.ability,
+          active: player.active,
+        });
       }
     });
+  };
+
+  const toggleAllInactive = () => {
+    props.activeList.map((player, id) => {
+      props.toggleInactive({
+        name: player.name,
+        ability: player.ability,
+        active: player.active,
+      });
+    });
+
+    // props.playerList.map((player, id) => {
+    //   props.toggleInactive(
+    //     { name: player.name, ability: player.ability, active: player.active },
+    //     id
+    //   );
+    // });
   };
 
   const editName = (inputName: string) => {
@@ -106,6 +129,10 @@ const AddPlayer = (props: AddPlayerProps) => {
             <button type="submit">Add Player</button>
           </Form>
         </FormContainer>
+        <NumLabel>
+          No. active of Players: {props.activeList.length} /{" "}
+          {props.playerList.length}
+        </NumLabel>
         <button
           onClick={() => {
             if (
@@ -124,6 +151,7 @@ const AddPlayer = (props: AddPlayerProps) => {
         </button>
 
         <button onClick={toggleAllActive}>Toggle All Active</button>
+        <button onClick={toggleAllInactive}>Toggle All Inactive</button>
       </Container>
     </React.Fragment>
   );
@@ -138,12 +166,16 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    addPlayer: (player: PlayerProps): void => {
+    addPlayer: (player: Player): void => {
       dispatch(addPlayerAction(player));
     },
 
-    toggleActive: (player: PlayerProps, index: number): void => {
-      dispatch(toggleActiveAction(player, index));
+    toggleActive: (player: Player): void => {
+      dispatch(toggleActiveAction(player));
+    },
+
+    toggleInactive: (player: Player): void => {
+      dispatch(toggleInactiveAction(player));
     },
   };
 }
@@ -191,4 +223,12 @@ const Select = styled.select`
 
 const Option = styled.option`
   //background-color: red;
+`;
+
+const NumLabel = styled.p`
+  position: absolute;
+  color: black;
+  font-size: 12px;
+  margin-top: -21px;
+  margin-left: 5px;
 `;

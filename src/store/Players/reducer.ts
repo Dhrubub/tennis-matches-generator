@@ -1,5 +1,5 @@
 import { actionTypes as at } from "./constants";
-import { PlayerProps } from "./actions";
+import { Player } from "./actions";
 
 interface Action {
   type: string;
@@ -7,8 +7,8 @@ interface Action {
 }
 
 interface PlayerState {
-  playerList: PlayerProps[];
-  activeList: PlayerProps[];
+  playerList: Player[];
+  activeList: Player[];
   isLoading: boolean;
 }
 
@@ -98,38 +98,39 @@ export default (state = initialState, action: Action) => {
       return {
         ...state,
         playerList: state.playerList.filter(
-          (player, id) => id !== action.payload
+          (player, id) => player.name !== action.payload
         ),
         activeList: state.activeList.filter(
-          (player, id) => id !== action.payload
+          (player, id) => player.name !== action.payload
         ),
       };
 
     case at.TOGGLE_ACTIVE:
       return {
         ...state,
-        playerList: state.playerList.map((player, id) => {
-          if (id === action.payload.index) {
+        playerList: state.playerList.map((player) => {
+          if (player.name === action.payload.name) {
             player.active = true;
           }
           return player;
         }),
 
-        activeList: [...state.activeList, action.payload.player],
+        activeList: [...state.activeList, action.payload],
       };
 
     case at.TOGGLE_INACTIVE:
+      console.log("inactive");
       return {
         ...state,
-        playerList: state.playerList.map((player, id) => {
-          if (id === action.payload.index) {
+        playerList: state.playerList.map((player) => {
+          if (player.name === action.payload.name) {
             player.active = false;
           }
           return player;
         }),
 
         activeList: state.activeList.filter(
-          (player, id) => id !== action.payload.index
+          (player, id) => player.name !== action.payload.name
         ),
       };
 
