@@ -23,7 +23,7 @@ interface PlayerProps {
   id: number;
 }
 
-const Player = (props: PlayerProps) => {
+const PlayerCard = (props: PlayerProps) => {
   const handleRemove = () => {
     props.removePlayer(props.name);
   };
@@ -73,7 +73,7 @@ function mapDispatchToProps(dispatch: any) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(Player);
+export default connect(null, mapDispatchToProps)(PlayerCard);
 
 const Container = styled.div`
   display: block;

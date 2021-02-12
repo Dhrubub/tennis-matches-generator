@@ -9,7 +9,7 @@ interface PlayerProps {
   className?: string;
 }
 
-const Player = (props: PlayerProps) => {
+const PlayerCard = (props: PlayerProps) => {
   return (
     <Container className={props.className}>
       <Name>{props.name}</Name>
@@ -18,7 +18,7 @@ const Player = (props: PlayerProps) => {
   );
 };
 
-export default Player;
+export default PlayerCard;
 
 const Container = styled.div`
   // display: block;

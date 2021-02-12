@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { selectActivePlayers } from "../../store/Players/selector";
 import { fetchActivePlayersAction } from "../../store/Players/actions";
-import Player from "./player";
+import Player from "./player-card";
 import styled from "styled-components";
 
 interface Set {

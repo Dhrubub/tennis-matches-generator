@@ -1,5 +1,5 @@
 import { actionTypes as at } from "./constants";
-import { PlayerProps } from "./actions";
+import { Player } from "./actions";
 
 interface Action {
   type: string;
@@ -7,8 +7,8 @@ interface Action {
 }
 
 interface PlayerState {
-  playerList: PlayerProps[];
-  activeList: PlayerProps[];
+  playerList: Player[];
+  activeList: Player[];
   isLoading: boolean;
 }
 

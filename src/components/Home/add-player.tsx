@@ -4,27 +4,27 @@ import { connect } from "react-redux";
 
 import {
   addPlayerAction,
-  PlayerProps,
+  Player,
   toggleInactiveAction,
 } from "../../store/Players/actions";
 import { selectAllPlayers } from "../../store/Players/selector";
 import { selectActivePlayers } from "../../store/Players/selector";
 import { toggleActiveAction } from "../../store/Players/actions";
 
-interface AddPlayerProps {
-  addPlayer: (player: PlayerProps) => void;
-  playerList: PlayerProps[];
+interface AddPlayer {
+  addPlayer: (player: Player) => void;
+  playerList: Player[];
   changeTab: () => void;
-  activeList: PlayerProps[];
-  toggleActive: (player: PlayerProps) => void;
-  toggleInactive: (player: PlayerProps) => void;
+  activeList: Player[];
+  toggleActive: (player: Player) => void;
+  toggleInactive: (player: Player) => void;
 }
 
-const AddPlayer = (props: AddPlayerProps) => {
+const AddPlayer = (props: AddPlayer) => {
   const [name, setName] = useState("");
   const [ability, setAbility] = useState("Beginner");
 
-  const [player, setPlayer] = useState<PlayerProps>({
+  const [player, setPlayer] = useState<Player>({
     name: "",
     ability: "Beginner",
     active: true,
@@ -129,6 +129,10 @@ const AddPlayer = (props: AddPlayerProps) => {
             <button type="submit">Add Player</button>
           </Form>
         </FormContainer>
+        <NumLabel>
+          No. active of Players: {props.activeList.length} /{" "}
+          {props.playerList.length}
+        </NumLabel>
         <button
           onClick={() => {
             if (
@@ -162,15 +166,15 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    addPlayer: (player: PlayerProps): void => {
+    addPlayer: (player: Player): void => {
       dispatch(addPlayerAction(player));
     },
 
-    toggleActive: (player: PlayerProps): void => {
+    toggleActive: (player: Player): void => {
       dispatch(toggleActiveAction(player));
     },
 
-    toggleInactive: (player: PlayerProps): void => {
+    toggleInactive: (player: Player): void => {
       dispatch(toggleInactiveAction(player));
     },
   };
@@ -219,4 +223,12 @@ const Select = styled.select`
 
 const Option = styled.option`
   //background-color: red;
+`;
+
+const NumLabel = styled.p`
+  position: absolute;
+  color: black;
+  font-size: 12px;
+  margin-top: -21px;
+  margin-left: 5px;
 `;

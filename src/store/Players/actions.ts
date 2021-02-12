@@ -1,6 +1,6 @@
 import { actionTypes as at } from "./constants";
 
-export interface PlayerProps {
+export interface Player {
   name: string;
   ability: string;
   active: boolean;
@@ -32,7 +32,7 @@ export const fetchPlayersBeginAction = () => {
   };
 };
 
-export const fetchPlayersSuccessAction = (players: PlayerProps[]) => {
+export const fetchPlayersSuccessAction = (players: Player[]) => {
   return {
     type: at.FETCH_PLAYERS_SUCCESS,
     payload: players,
@@ -51,7 +51,7 @@ export const fetchActivePlayersAction = () => {
   };
 };
 
-export const addPlayerAction = (player: PlayerProps) => {
+export const addPlayerAction = (player: Player) => {
   return {
     type: at.ADD_PLAYER,
     payload: player,
@@ -65,14 +65,14 @@ export const removePlayerAction = (name: string) => {
   };
 };
 
-export const toggleActiveAction = (player: PlayerProps) => {
+export const toggleActiveAction = (player: Player) => {
   return {
     type: at.TOGGLE_ACTIVE,
     payload: player,
   };
 };
 
-export const toggleInactiveAction = (player: PlayerProps) => {
+export const toggleInactiveAction = (player: Player) => {
   return {
     type: at.TOGGLE_INACTIVE,
     payload: player,
