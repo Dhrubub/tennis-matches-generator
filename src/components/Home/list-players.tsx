@@ -16,8 +16,9 @@ enum SortType {
   a_first = "a to z",
   a_last = "z to a",
   highest_first = "high to low",
-  lowest_first = "low to high"
-
+  lowest_first = "low to high",
+  active_first = "active",
+  inactive_first = "inactive",
 }
 interface ListPlayersProps {
   fetchAllPlayers: () => void;
@@ -40,8 +41,8 @@ const ListPlayers = (props: ListPlayersProps) => {
         return 0;
       }
 
-      let varA: string | number = "";
-      let varB: string | number = ""
+      let varA: any = "";
+      let varB: any = ""
       
       if (key === 'name') {
         varA = a[key].toLowerCase()
@@ -70,10 +71,10 @@ const ListPlayers = (props: ListPlayersProps) => {
         varB = assignAbility(b[key]) 
       }
 
-      // const varA = (typeof a[key] === 'string')
-      //   ? a[key].toUpperCase() : a[key];
-      // const varB = (typeof b[key] === 'string')
-      //   ? b[key].toUpperCase() : b[key];
+      else if (key === "active") {
+        varA = a[key];
+        varB = b[key];
+      }
   
       let comparison = 0;
       if (varA > varB) {
@@ -87,26 +88,36 @@ const ListPlayers = (props: ListPlayersProps) => {
     };
   }
 
-  useEffect(() => {
+  const sortList = () => {
     switch (sort) {
       case SortType.none:
         break;
         case SortType.a_first:
-          setPlayerList(props.playerList.sort(compareValues('name')));
+          setPlayerList(props.playerList.slice().sort(compareValues('name', 'desc')));
           break;
         case SortType.a_last:
-          setPlayerList(props.playerList.sort(compareValues('name', 'desc')));
+          setPlayerList(props.playerList.slice().sort(compareValues('name')));
           break;
         case SortType.highest_first:
-          setPlayerList(props.playerList.sort(compareValues('ability')));
+          setPlayerList(props.playerList.slice().sort(compareValues('ability')));
           break;
         case SortType.lowest_first:
-          setPlayerList(props.playerList.sort(compareValues('ability', 'desc')));
+          setPlayerList(props.playerList.slice().sort(compareValues('ability', 'desc')));
+          break;
+        case SortType.active_first:
+          setPlayerList(props.playerList.slice().sort(compareValues('active')));
+          break;
+        case SortType.inactive_first:
+          setPlayerList(props.playerList.slice().sort(compareValues('active', 'desc')));
           break;
         default:
           break;
     }
-  }, [sort, playerList])
+  }
+
+  useEffect(() => {
+    sortList();
+  }, [sort, props.playerList])
 
 
 
@@ -126,6 +137,8 @@ const ListPlayers = (props: ListPlayersProps) => {
         <Option>{SortType.a_last}</Option>
         <Option>{SortType.highest_first}</Option>
         <Option>{SortType.lowest_first}</Option>
+        <Option>{SortType.active_first}</Option>
+        <Option>{SortType.inactive_first}</Option>
       </Select>
       {playerList
         .map((player, id) => (
