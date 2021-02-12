@@ -16,8 +16,8 @@ interface AddPlayerProps {
   playerList: PlayerProps[];
   changeTab: () => void;
   activeList: PlayerProps[];
-  toggleActive: (player: PlayerProps, key: number) => void;
-  toggleInactive: (player: PlayerProps, key: number) => void;
+  toggleActive: (player: PlayerProps) => void;
+  toggleInactive: (player: PlayerProps) => void;
 }
 
 const AddPlayer = (props: AddPlayerProps) => {
@@ -31,22 +31,24 @@ const AddPlayer = (props: AddPlayerProps) => {
   });
 
   const toggleAllActive = () => {
-    props.playerList.map((player, id) => {
+    props.playerList.map((player) => {
       if (!player.active) {
-        props.toggleActive(
-          { name: player.name, ability: player.ability, active: player.active },
-          id
-        );
+        props.toggleActive({
+          name: player.name,
+          ability: player.ability,
+          active: player.active,
+        });
       }
     });
   };
 
   const toggleAllInactive = () => {
     props.activeList.map((player, id) => {
-      props.toggleInactive(
-        { name: player.name, ability: player.ability, active: player.active },
-        id
-      );
+      props.toggleInactive({
+        name: player.name,
+        ability: player.ability,
+        active: player.active,
+      });
     });
 
     // props.playerList.map((player, id) => {
@@ -164,12 +166,12 @@ function mapDispatchToProps(dispatch: any) {
       dispatch(addPlayerAction(player));
     },
 
-    toggleActive: (player: PlayerProps, index: number): void => {
-      dispatch(toggleActiveAction(player, index));
+    toggleActive: (player: PlayerProps): void => {
+      dispatch(toggleActiveAction(player));
     },
 
-    toggleInactive: (player: PlayerProps, index: number): void => {
-      dispatch(toggleInactiveAction(player, index));
+    toggleInactive: (player: PlayerProps): void => {
+      dispatch(toggleInactiveAction(player));
     },
   };
 }

@@ -18,8 +18,8 @@ interface PlayerProps {
   ability: string;
   active: boolean;
   removePlayer: (name: string) => void;
-  toggleActive: (player: Player, key: number) => void;
-  toggleInactive: (player: Player, key: number) => void;
+  toggleActive: (player: Player) => void;
+  toggleInactive: (player: Player) => void;
   id: number;
 }
 
@@ -30,15 +30,17 @@ const Player = (props: PlayerProps) => {
 
   const toggleActive = () => {
     if (props.active) {
-      props.toggleInactive(
-        { name: props.name, ability: props.ability, active: props.active },
-        props.id
-      );
+      props.toggleInactive({
+        name: props.name,
+        ability: props.ability,
+        active: props.active,
+      });
     } else {
-      props.toggleActive(
-        { name: props.name, ability: props.ability, active: props.active },
-        props.id
-      );
+      props.toggleActive({
+        name: props.name,
+        ability: props.ability,
+        active: props.active,
+      });
     }
   };
 
@@ -61,12 +63,12 @@ function mapDispatchToProps(dispatch: any) {
       dispatch(removePlayerAction(name));
     },
 
-    toggleActive: (player: Player, id: number): void => {
-      dispatch(toggleActiveAction(player, id));
+    toggleActive: (player: Player): void => {
+      dispatch(toggleActiveAction(player));
     },
 
-    toggleInactive: (player: Player, id: number): void => {
-      dispatch(toggleInactiveAction(player, id));
+    toggleInactive: (player: Player): void => {
+      dispatch(toggleInactiveAction(player));
     },
   };
 }

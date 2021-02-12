@@ -108,30 +108,29 @@ export default (state = initialState, action: Action) => {
     case at.TOGGLE_ACTIVE:
       return {
         ...state,
-        playerList: state.playerList.map((player, id) => {
-          if (id === action.payload.index) {
+        playerList: state.playerList.map((player) => {
+          if (player.name === action.payload.name) {
             player.active = true;
           }
           return player;
         }),
 
-        activeList: [...state.activeList, action.payload.player],
+        activeList: [...state.activeList, action.payload],
       };
 
     case at.TOGGLE_INACTIVE:
-      console.log(action.payload.index);
       console.log("inactive");
       return {
         ...state,
-        playerList: state.playerList.map((player, id) => {
-          if (id === action.payload.index) {
+        playerList: state.playerList.map((player) => {
+          if (player.name === action.payload.name) {
             player.active = false;
           }
           return player;
         }),
 
         activeList: state.activeList.filter(
-          (player, id) => player !== action.payload.player
+          (player, id) => player.name !== action.payload.name
         ),
       };
 
