@@ -77,10 +77,7 @@ export default connect(null, mapDispatchToProps)(PlayerCard);
 
 const Container = styled.div`
   display: block;
-  //border-radius: 20px;
   color: black;
-  //background-color: lightgrey;
-  //border: 1px solid grey;
 
   height: fit-content;
   word-wrap: break-word;
@@ -93,29 +90,28 @@ const Container = styled.div`
 
   margin: auto;
 
-  //margin-bottom: 20px;
+  margin-bottom: 10px;
 
   box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.8);
-  //border: 1px solid black;
 
   &.active {
     //background-color: green;
-    background-image: linear-gradient(45deg, rgba(0,255,0,0.5) 40%, lightgrey 70%);
+    background-image: linear-gradient(45deg, rgba(0,255,0,0.5) 40%, transparent 70%);
     //border: 2px solid green;
   }
 
   &.inactive {
     //background-color: red;
-    background-image: linear-gradient(45deg, rgba(255,0,0,0.5) 40%, lightgrey 70%);
+    background-image: linear-gradient(45deg, rgba(255,0,0,0.5) 40%, transparent 70%);
     //border: 2px solid red;
   }
 
   &.even {
-    //background-color: grey;
+    background-color: rgb(135,206,235, 0.2);
   }
 
   &.odd {
-    //background-color: lightgrey;
+    background-color: rgb(135,206,235, 0.4);
   }
 `;
 
