@@ -8,6 +8,8 @@ import PlayerCard from "./player-card";
 import { Player } from "../../store/Players/actions";
 import styled from "styled-components";
 
+import { AbilityTypes as ab } from "./add-player"
+
 
 enum SortType {
   none = "none",
@@ -30,6 +32,83 @@ const ListPlayers = (props: ListPlayersProps) => {
   }, []);
 
 
+  //  https://www.sitepoint.com/sort-an-array-of-objects-in-javascript/
+  function compareValues(key: string, order = 'asc') {
+    return function innerSort(a: any, b: any) {
+      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+        // property doesn't exist on either object
+        return 0;
+      }
+
+      let varA: string | number = "";
+      let varB: string | number = ""
+      
+      if (key === 'name') {
+        varA = a[key].toLowerCase()
+        varB = b[key].toLowerCase() 
+      }
+      else if (key === 'ability') {
+        const assignAbility = (item: string) => {
+          switch (item) {
+            case ab.beginner:
+              return 1;
+              break;
+            case ab.intermediate:
+              return 2;
+              break;
+            case ab.competent:
+              return 3;
+              break;
+            case ab.proficient:
+              return 4;
+              break;
+            default:
+              return 0;
+          }
+        }
+        varA = assignAbility(a[key]) 
+        varB = assignAbility(b[key]) 
+      }
+
+      // const varA = (typeof a[key] === 'string')
+      //   ? a[key].toUpperCase() : a[key];
+      // const varB = (typeof b[key] === 'string')
+      //   ? b[key].toUpperCase() : b[key];
+  
+      let comparison = 0;
+      if (varA > varB) {
+        comparison = 1;
+      } else if (varA < varB) {
+        comparison = -1;
+      }
+      return (
+        (order === 'desc') ? (comparison * -1) : comparison
+      );
+    };
+  }
+
+  useEffect(() => {
+    switch (sort) {
+      case SortType.none:
+        break;
+        case SortType.a_first:
+          setPlayerList(props.playerList.sort(compareValues('name')));
+          break;
+        case SortType.a_last:
+          setPlayerList(props.playerList.sort(compareValues('name', 'desc')));
+          break;
+        case SortType.highest_first:
+          setPlayerList(props.playerList.sort(compareValues('ability')));
+          break;
+        case SortType.lowest_first:
+          setPlayerList(props.playerList.sort(compareValues('ability', 'desc')));
+          break;
+        default:
+          break;
+    }
+  }, [sort, playerList])
+
+
 
   return (
     <React.Fragment>
@@ -48,7 +127,7 @@ const ListPlayers = (props: ListPlayersProps) => {
         <Option>{SortType.highest_first}</Option>
         <Option>{SortType.lowest_first}</Option>
       </Select>
-      {props.playerList
+      {playerList
         .map((player, id) => (
           <PlayerCard
           key={id}
@@ -100,8 +179,8 @@ const Option = styled.option`
 `;
 
 const Label = styled.option`
-display: inline;
-margin-left: 5%;
-margin-right: 2%;
+  display: inline;
+  margin-left: 5%;
+  margin-right: 2%;
   //background-color: red;
 `;
