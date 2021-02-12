@@ -29,7 +29,7 @@ interface AddPlayer {
 
 const AddPlayer = (props: AddPlayer) => {
   const [name, setName] = useState("");
-  const [ability, setAbility] = useState("Beginner");
+  const [ability, setAbility] = useState(String(AbilityTypes.beginner));
 
   const [player, setPlayer] = useState<Player>({
     name: "",
