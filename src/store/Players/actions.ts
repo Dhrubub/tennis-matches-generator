@@ -58,10 +58,10 @@ export const addPlayerAction = (player: PlayerProps) => {
   };
 };
 
-export const removePlayerAction = (index: number) => {
+export const removePlayerAction = (name: string) => {
   return {
     type: at.REMOVE_PLAYER,
-    payload: index,
+    payload: name,
   };
 };
 

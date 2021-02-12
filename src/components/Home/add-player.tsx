@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 
-import { addPlayerAction, PlayerProps } from "../../store/Players/actions";
+import {
+  addPlayerAction,
+  PlayerProps,
+  toggleInactiveAction,
+} from "../../store/Players/actions";
 import { selectAllPlayers } from "../../store/Players/selector";
 import { selectActivePlayers } from "../../store/Players/selector";
 import { toggleActiveAction } from "../../store/Players/actions";
@@ -13,6 +17,7 @@ interface AddPlayerProps {
   changeTab: () => void;
   activeList: PlayerProps[];
   toggleActive: (player: PlayerProps, key: number) => void;
+  toggleInactive: (player: PlayerProps, key: number) => void;
 }
 
 const AddPlayer = (props: AddPlayerProps) => {
@@ -29,11 +34,27 @@ const AddPlayer = (props: AddPlayerProps) => {
     props.playerList.map((player, id) => {
       if (!player.active) {
         props.toggleActive(
-          { name: player.name, ability: player.ability, active: true },
+          { name: player.name, ability: player.ability, active: player.active },
           id
         );
       }
     });
+  };
+
+  const toggleAllInactive = () => {
+    props.activeList.map((player, id) => {
+      props.toggleInactive(
+        { name: player.name, ability: player.ability, active: player.active },
+        id
+      );
+    });
+
+    // props.playerList.map((player, id) => {
+    //   props.toggleInactive(
+    //     { name: player.name, ability: player.ability, active: player.active },
+    //     id
+    //   );
+    // });
   };
 
   const editName = (inputName: string) => {
@@ -124,6 +145,7 @@ const AddPlayer = (props: AddPlayerProps) => {
         </button>
 
         <button onClick={toggleAllActive}>Toggle All Active</button>
+        <button onClick={toggleAllInactive}>Toggle All Inactive</button>
       </Container>
     </React.Fragment>
   );
@@ -144,6 +166,10 @@ function mapDispatchToProps(dispatch: any) {
 
     toggleActive: (player: PlayerProps, index: number): void => {
       dispatch(toggleActiveAction(player, index));
+    },
+
+    toggleInactive: (player: PlayerProps, index: number): void => {
+      dispatch(toggleInactiveAction(player, index));
     },
   };
 }

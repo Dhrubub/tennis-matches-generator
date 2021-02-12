@@ -17,7 +17,7 @@ interface PlayerProps {
   name: string;
   ability: string;
   active: boolean;
-  removePlayer: (key: number) => void;
+  removePlayer: (name: string) => void;
   toggleActive: (player: Player, key: number) => void;
   toggleInactive: (player: Player, key: number) => void;
   id: number;
@@ -25,7 +25,7 @@ interface PlayerProps {
 
 const Player = (props: PlayerProps) => {
   const handleRemove = () => {
-    props.removePlayer(props.id);
+    props.removePlayer(props.name);
   };
 
   const toggleActive = () => {
@@ -57,8 +57,8 @@ const Player = (props: PlayerProps) => {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    removePlayer: (id: number): void => {
-      dispatch(removePlayerAction(id));
+    removePlayer: (name: string): void => {
+      dispatch(removePlayerAction(name));
     },
 
     toggleActive: (player: Player, id: number): void => {

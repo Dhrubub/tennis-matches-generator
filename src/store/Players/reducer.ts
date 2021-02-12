@@ -98,10 +98,10 @@ export default (state = initialState, action: Action) => {
       return {
         ...state,
         playerList: state.playerList.filter(
-          (player, id) => id !== action.payload
+          (player, id) => player.name !== action.payload
         ),
         activeList: state.activeList.filter(
-          (player, id) => id !== action.payload
+          (player, id) => player.name !== action.payload
         ),
       };
 
@@ -119,6 +119,8 @@ export default (state = initialState, action: Action) => {
       };
 
     case at.TOGGLE_INACTIVE:
+      console.log(action.payload.index);
+      console.log("inactive");
       return {
         ...state,
         playerList: state.playerList.map((player, id) => {
@@ -129,7 +131,7 @@ export default (state = initialState, action: Action) => {
         }),
 
         activeList: state.activeList.filter(
-          (player, id) => id !== action.payload.index
+          (player, id) => player !== action.payload.player
         ),
       };
 
