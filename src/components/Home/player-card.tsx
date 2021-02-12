@@ -107,22 +107,22 @@ const Container = styled.div`
   }
 
   &.even {
-    background-color: rgb(135,206,235, 0.2);
+    background-color: rgba(220,220,220);
   }
 
   &.odd {
-    background-color: rgb(135,206,235, 0.4);
+    background-color: rgba(240,240,240);
   }
 `;
 
 const PlayerName = styled.label`
   display: inline-block;
   margin-right: 10vw;
-  width: 20%;
+  width: 30%;
 
   font-weight: bold;
 
-  margin-right: 5%;
+  margin-right: 2%;
 
   word-break: break-all;
 `;
@@ -131,7 +131,7 @@ const PlayerAbility = styled.label`
   display: inline-block;
   width: 30%;
 
-  margin-right: 15%;
+  margin-right: 8%;
 `;
 
 const Icon = styled.i`
