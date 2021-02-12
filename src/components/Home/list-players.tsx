@@ -12,13 +12,13 @@ import { AbilityTypes as ab } from "./add-player"
 
 
 enum SortType {
-  none = "none",
-  a_first = "a to z",
-  a_last = "z to a",
-  highest_first = "high to low",
-  lowest_first = "low to high",
-  active_first = "active",
-  inactive_first = "inactive",
+  none = "Default",
+  a_first = "Name: A-Z",
+  a_last = "Name: Z-A",
+  highest_first = "High to Low",
+  lowest_first = "Low to High",
+  active_first = "Active First",
+  inactive_first = "Inactive First",
 }
 interface ListPlayersProps {
   fetchAllPlayers: () => void;
@@ -182,7 +182,7 @@ const Container = styled.div`
 `;
 
 const Select = styled.select`
-  padding: 5px;
+  padding: 0px;
   margin-bottom: 10px;
   //background-color: lightgreen;
 `;
@@ -194,6 +194,6 @@ const Option = styled.option`
 const Label = styled.option`
   display: inline;
   margin-left: 5%;
-  margin-right: 2%;
+  margin-right: 1%;
   //background-color: red;
 `;
