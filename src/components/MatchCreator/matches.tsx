@@ -7,6 +7,7 @@ import PlayerCard from "./player-card";
 import styled from "styled-components";
 
 import {AbilityTypes as ab} from "../Home/add-player";
+import { create } from "domain";
 
 interface Set {
   teamOne: {
@@ -36,12 +37,13 @@ interface ListPlayersProps {
 }
 
 const Matches = (props: ListPlayersProps) => {
-  const LIMIT = 0;
+  const numMatches = Math.ceil(props.playerList.length/4);
   const [shuffledList, setShuffledList] = useState<Array<PlayerWithRating>>([]);
   const [dummyList, setDummyList] = useState<Array<PlayerWithRating>>([]);
   const [set, setSet] = useState<Set>();
   const [setUp, setSetUp] = useState<Array<Set>>([]);
   const [sortedList, setSortedList] = useState<Array<Pair>>([]);
+
 
   //  RANDOMLY SORT THE PLAYERS INTO A LIST
   //==========================================================
@@ -175,16 +177,14 @@ const Matches = (props: ListPlayersProps) => {
   }, [props.playerList]);
 
   useEffect(() => {
-
     const dummies = (4 - props.playerList.length % 4) !== 4 ? 4 - props.playerList.length % 4 : 0;
+    
     let dummiesList: any = []
-    for (let i = 0 ; i < dummies ; i++) {
-      dummiesList = [...dummiesList, {name: "Dummy", ability: "Dummy"}]    
+    if (dummies % 2 == 1) {
+      dummiesList=[{name: "Dummy", ability: "Dummy"}]
     }
 
-    setSortedList(createSets(selectPairs(shuffledList)));
-    //console.log(selectPairs(shuffledList))
-
+    
     const pairsList = createSets(selectPairs([...shuffledList, ...dummiesList]))
     let tempList: PlayerWithRating[] = [];
 
@@ -201,20 +201,14 @@ const Matches = (props: ListPlayersProps) => {
     tempList = tempList.filter(player => player.ability !== "Dummy")
     
     for (let i = 0 ; i < dummies ; i++) {
-      tempList.splice(i*2, 0, {name: "Dummy", ability: 0})
+      tempList.splice(i*2, 0, {name: "Dummy", ability: ''})
     }
-    
-    //console.log(tempList)
-    //console.log(selectPairs(tempList))
 
-    //setSortedList(createSets(selectPairs(tempList)));
-    //setSortedList(pairsList)
-    //setDummyList(tempList);
+    setSortedList(selectPairs(tempList))
 
   }, [shuffledList]);
 
   useEffect(() => {
-    //console.log(dummyList)
     //setSortedList(selectPairs(dummyList))
   }, [dummyList])
 
@@ -234,7 +228,7 @@ const Matches = (props: ListPlayersProps) => {
         <GridContainer>
           {setUp ? (
             <Grid>
-              {setUp.map((set, id) => {
+              {setUp.length === numMatches && setUp.map((set, id) => {
                 //console.log(set)
               return (
                 <IndividualSet key={id}>
