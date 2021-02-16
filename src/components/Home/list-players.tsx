@@ -91,6 +91,7 @@ const ListPlayers = (props: ListPlayersProps) => {
   const sortList = () => {
     switch (sort) {
       case SortType.none:
+        setPlayerList(props.playerList);
         break;
         case SortType.a_first:
           setPlayerList(props.playerList.slice().sort(compareValues('name', 'desc')));
@@ -111,6 +112,7 @@ const ListPlayers = (props: ListPlayersProps) => {
           setPlayerList(props.playerList.slice().sort(compareValues('active', 'desc')));
           break;
         default:
+          setPlayerList(props.playerList);
           break;
     }
   }
