@@ -144,12 +144,12 @@ const AddPlayer = (props: AddPlayer) => {
           onClick={() => {
             if (
               // props.activeList.length % 4 === 0 &&
-              props.activeList.length !== 0
+              props.activeList.length > 3
             ) {
               props.changeTab();
             } else {
               window.alert(
-                "Number of active players must be greater 0 and divisible by 4"
+                "Number of active players must be greater 3"
               );
             }
           }}
