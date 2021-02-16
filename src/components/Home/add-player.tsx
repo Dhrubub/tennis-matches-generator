@@ -143,7 +143,7 @@ const AddPlayer = (props: AddPlayer) => {
         <button
           onClick={() => {
             if (
-              props.activeList.length % 4 === 0 &&
+              // props.activeList.length % 4 === 0 &&
               props.activeList.length !== 0
             ) {
               props.changeTab();

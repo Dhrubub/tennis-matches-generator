@@ -38,6 +38,7 @@ interface ListPlayersProps {
 const Matches = (props: ListPlayersProps) => {
   const LIMIT = 0;
   const [shuffledList, setShuffledList] = useState<Array<PlayerWithRating>>([]);
+  const [dummyList, setDummyList] = useState<Array<PlayerWithRating>>([]);
   const [set, setSet] = useState<Set>();
   const [setUp, setSetUp] = useState<Array<Set>>([]);
   const [sortedList, setSortedList] = useState<Array<Pair>>([]);
@@ -46,7 +47,6 @@ const Matches = (props: ListPlayersProps) => {
   //==========================================================
   useEffect(() => {
     props.fetchActivePlayers();
-    console.log("fetching active players only");
   }, []);
 
   const shufflePlayers = () => {
@@ -144,9 +144,17 @@ const Matches = (props: ListPlayersProps) => {
     let pivot = items[right];
 
     for (let j = left; j < right; j++) {
+      const t1p1 = items[j].playerOne.ability !== "Dummy" ? items[j].playerOne.ability : 2;
+      const t1p2 = items[j].playerTwo.ability !== "Dummy" ? items[j].playerTwo.ability : 2;
+
+      const t2p1 = items[right].playerOne.ability !== "Dummy" ?  items[right].playerOne.ability : 2;
+      const t2p2 = items[right].playerTwo.ability !== "Dummy" ? items[right].playerTwo.ability : 2;
+
+      //console.log({t1p1, t1p2, t2p1, t2p2});
+
       if (
-        items[j].playerOne.ability + items[j].playerTwo.ability >
-        items[right].playerOne.ability + items[right].playerTwo.ability
+        t1p1 + t1p2 >
+        t2p1 + t2p2
       ) {
         i++;
         let temp = items[j];
@@ -164,19 +172,58 @@ const Matches = (props: ListPlayersProps) => {
 
   useEffect(() => {
     setShuffledList(shufflePlayers());
-    console.log(props.playerList);
   }, [props.playerList]);
 
   useEffect(() => {
+
+    const dummies = (4 - props.playerList.length % 4) !== 4 ? 4 - props.playerList.length % 4 : 0;
+    let dummiesList: any = []
+    for (let i = 0 ; i < dummies ; i++) {
+      dummiesList = [...dummiesList, {name: "Dummy", ability: "Dummy"}]    
+    }
+
     setSortedList(createSets(selectPairs(shuffledList)));
+    //console.log(selectPairs(shuffledList))
+
+    const pairsList = createSets(selectPairs([...shuffledList, ...dummiesList]))
+    let tempList: PlayerWithRating[] = [];
+
+    for (let i = 0 ; i < pairsList.length ; i++) {
+      if (pairsList[i].playerOne) {
+        tempList =  [...tempList, pairsList[i].playerOne]
+      }
+
+      if (pairsList[i].playerTwo) {
+        tempList =  [...tempList, pairsList[i].playerTwo]
+      }
+    }
+
+    tempList = tempList.filter(player => player.ability !== "Dummy")
+    
+    for (let i = 0 ; i < dummies ; i++) {
+      tempList.splice(i*2, 0, {name: "Dummy", ability: 0})
+    }
+    
+    //console.log(tempList)
+    //console.log(selectPairs(tempList))
+
+    //setSortedList(createSets(selectPairs(tempList)));
+    //setSortedList(pairsList)
+    //setDummyList(tempList);
+
   }, [shuffledList]);
+
+  useEffect(() => {
+    //console.log(dummyList)
+    //setSortedList(selectPairs(dummyList))
+  }, [dummyList])
 
   useEffect(() => {
     setSetUp(createMatches(sortedList));
   }, [sortedList]);
 
   useEffect(() => {
-    console.log(setUp);
+    //console.log(setUp);
   }, [setUp]);
   //==========================================================
 
@@ -187,7 +234,9 @@ const Matches = (props: ListPlayersProps) => {
         <GridContainer>
           {setUp ? (
             <Grid>
-              {setUp.map((set, id) => (
+              {setUp.map((set, id) => {
+                //console.log(set)
+              return (
                 <IndividualSet key={id}>
                   <Label>Court {8 - id}</Label>
                   <TeamsContainer>
@@ -221,7 +270,7 @@ const Matches = (props: ListPlayersProps) => {
                     </Teams>
                   </TeamsContainer>
                 </IndividualSet>
-              ))}
+              )})}
             </Grid>
           ) : null}
         </GridContainer>
