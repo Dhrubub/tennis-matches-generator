@@ -8,8 +8,7 @@ import PlayerCard from "./player-card";
 import { Player } from "../../store/Players/actions";
 import styled from "styled-components";
 
-import { AbilityTypes as ab } from "./add-player"
-
+import { AbilityTypes as ab } from "./add-player";
 
 enum SortType {
   none = "Default",
@@ -32,9 +31,8 @@ const ListPlayers = (props: ListPlayersProps) => {
     props.fetchAllPlayers();
   }, []);
 
-
   //  https://www.sitepoint.com/sort-an-array-of-objects-in-javascript/
-  function compareValues(key: string, order = 'asc') {
+  function compareValues(key: string, order = "asc") {
     return function innerSort(a: any, b: any) {
       if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
         // property doesn't exist on either object
@@ -42,13 +40,12 @@ const ListPlayers = (props: ListPlayersProps) => {
       }
 
       let varA: any = "";
-      let varB: any = ""
-      
-      if (key === 'name') {
-        varA = a[key].toLowerCase()
-        varB = b[key].toLowerCase() 
-      }
-      else if (key === 'ability') {
+      let varB: any = "";
+
+      if (key === "name") {
+        varA = a[key].toLowerCase();
+        varB = b[key].toLowerCase();
+      } else if (key === "ability") {
         const assignAbility = (item: string) => {
           switch (item) {
             case ab.beginner:
@@ -66,25 +63,21 @@ const ListPlayers = (props: ListPlayersProps) => {
             default:
               return 0;
           }
-        }
-        varA = assignAbility(a[key]) 
-        varB = assignAbility(b[key]) 
-      }
-
-      else if (key === "active") {
+        };
+        varA = assignAbility(a[key]);
+        varB = assignAbility(b[key]);
+      } else if (key === "active") {
         varA = a[key];
         varB = b[key];
       }
-  
+
       let comparison = 0;
       if (varA > varB) {
         comparison = 1;
       } else if (varA < varB) {
         comparison = -1;
       }
-      return (
-        (order === 'desc') ? (comparison * -1) : comparison
-      );
+      return order === "desc" ? comparison * -1 : comparison;
     };
   }
 
@@ -93,67 +86,101 @@ const ListPlayers = (props: ListPlayersProps) => {
       case SortType.none:
         setPlayerList(props.playerList);
         break;
-        case SortType.a_first:
-          setPlayerList(props.playerList.slice().sort(compareValues('name', 'desc')));
-          break;
-        case SortType.a_last:
-          setPlayerList(props.playerList.slice().sort(compareValues('name')));
-          break;
-        case SortType.highest_first:
-          setPlayerList(props.playerList.slice().sort(compareValues('ability')));
-          break;
-        case SortType.lowest_first:
-          setPlayerList(props.playerList.slice().sort(compareValues('ability', 'desc')));
-          break;
-        case SortType.active_first:
-          setPlayerList(props.playerList.slice().sort(compareValues('active')));
-          break;
-        case SortType.inactive_first:
-          setPlayerList(props.playerList.slice().sort(compareValues('active', 'desc')));
-          break;
-        default:
-          setPlayerList(props.playerList);
-          break;
+      case SortType.a_first:
+        setPlayerList(
+          props.playerList.slice().sort(compareValues("name", "desc"))
+        );
+        break;
+      case SortType.a_last:
+        setPlayerList(props.playerList.slice().sort(compareValues("name")));
+        break;
+      case SortType.highest_first:
+        setPlayerList(props.playerList.slice().sort(compareValues("ability")));
+        break;
+      case SortType.lowest_first:
+        setPlayerList(
+          props.playerList.slice().sort(compareValues("ability", "desc"))
+        );
+        break;
+      case SortType.active_first:
+        setPlayerList(props.playerList.slice().sort(compareValues("active")));
+        break;
+      case SortType.inactive_first:
+        setPlayerList(
+          props.playerList.slice().sort(compareValues("active", "desc"))
+        );
+        break;
+      default:
+        setPlayerList(props.playerList);
+        break;
     }
-  }
+  };
 
   useEffect(() => {
     sortList();
-  }, [sort, props.playerList])
+  }, [sort, props.playerList]);
 
+  const countAbilities = () => {
+    let b = 0,
+      i = 0,
+      c = 0,
+      p = 0;
 
+    for (let j = 0; j < playerList.length; j++) {
+      switch (playerList[j].ability) {
+        case ab.beginner:
+          b += 1;
+          break;
+        case ab.intermediate:
+          i += 1;
+          break;
+        case ab.competent:
+          c += 1;
+          break;
+        case ab.proficient:
+          p += 1;
+          break;
+      }
+    }
+
+    return [b, i, c, p];
+  };
+
+  useEffect(() => {
+    console.log(countAbilities());
+  }, props.playerList);
 
   return (
     <React.Fragment>
       <Container>
-      <Label>Sort by: </Label>
-      <Select
-        name="sort"
-        value={sort}
-        onChange={(e) => {
-          setSort(e.target.value);
-        }}
-      >
-        <Option>{SortType.none}</Option>
-        <Option>{SortType.a_first}</Option>
-        <Option>{SortType.a_last}</Option>
-        <Option>{SortType.highest_first}</Option>
-        <Option>{SortType.lowest_first}</Option>
-        <Option>{SortType.active_first}</Option>
-        <Option>{SortType.inactive_first}</Option>
-      </Select>
-      {playerList
-        .map((player, id) => (
-          <PlayerCard
-          key={id}
-          id={id}
-          name={player.name}
-          ability={player.ability}
-          active={player.active}
-          />
+        <Label>Sort by: </Label>
+        <Select
+          name="sort"
+          value={sort}
+          onChange={(e) => {
+            setSort(e.target.value);
+          }}
+        >
+          <Option>{SortType.none}</Option>
+          <Option>{SortType.a_first}</Option>
+          <Option>{SortType.a_last}</Option>
+          <Option>{SortType.highest_first}</Option>
+          <Option>{SortType.lowest_first}</Option>
+          <Option>{SortType.active_first}</Option>
+          <Option>{SortType.inactive_first}</Option>
+        </Select>
+        {playerList
+          .map((player, id) => (
+            <PlayerCard
+              key={id}
+              id={id}
+              name={player.name}
+              ability={player.ability}
+              active={player.active}
+            />
           ))
           .reverse()}
-        </Container>
+      </Container>
     </React.Fragment>
   );
 };
@@ -175,12 +202,11 @@ function mapDispatchToProps(dispatch: any) {
 export default connect(mapStateToProps, mapDispatchToProps)(ListPlayers);
 
 const Container = styled.div`
-  width: 100%;;
+  width: 100%;
   max-width: 800px;
 
   margin: auto;
   margin-bottom: 20px;
-  
 `;
 
 const Select = styled.select`

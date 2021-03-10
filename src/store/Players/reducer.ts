@@ -1,7 +1,7 @@
 import { actionTypes as at } from "./constants";
 import { Player } from "./actions";
 
-import {AbilityTypes as ab} from "../../components/Home/add-player"
+import { AbilityTypes as ab } from "../../components/Home/add-player";
 
 interface Action {
   type: string;
@@ -48,12 +48,19 @@ const testList = [
   { name: "Anne", ability: ab.beginner, active: false },
   { name: "Jo", ability: ab.beginner, active: false },
   { name: "Indrek", ability: ab.competent, active: false },
-  { name: "Nish", ability: ab.competent, active: false },
+  { name: "Nish", ability: ab.proficient, active: false },
 
   { name: "Yogesh", ability: ab.beginner, active: false },
   { name: "Dwight", ability: ab.proficient, active: false },
   { name: "Selva", ability: ab.beginner, active: false },
   { name: "Sathya", ability: ab.beginner, active: false },
+
+  { name: "S.Singh", ability: ab.proficient, active: false },
+  { name: "Craig", ability: ab.intermediate, active: false },
+  { name: "Penny", ability: ab.beginner, active: false },
+  { name: "Pinky", ability: ab.beginner, active: false },
+
+  { name: "Hendra", ability: ab.intermediate, active: false },
 ];
 
 const initialState: PlayerState = {
